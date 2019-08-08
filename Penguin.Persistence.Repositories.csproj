@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
+    <PackageProjectUrl>http://www.Frameworkms.com</PackageProjectUrl>
+	<PackageIconUrl>http://www.penguinms.com/client/images/pg.png</PackageIconUrl>
+    <Version>1.1.12</Version>
+	<Description>Abstract objects and interfaces for use with Penguin.Persistence.Abstractions created to convert EntityFramework contexts to a repository pattern allowing for applications to decouple from EF and allow for other data providers.</Description> 
+  </PropertyGroup>
+  
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningsAsErrors>NU1605, CS1591</WarningsAsErrors>
+    <DocumentationFile>C:\SVN\Framework\Nuget\Penguin.Persistence.Repositories\Penguin.Persistence.Repositories.xml</DocumentationFile>
+  </PropertyGroup>
+  
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	<DebugType>full</DebugType>
+      <DocumentationFile>C:\SVN\Framework\Nuget\Penguin.Persistence.Repositories\Penguin.Persistence.Repositories.xml</DocumentationFile>
+    </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Penguin.Entities" Version="1.0.8" />
+    <PackageReference Include="Penguin.Messaging.Core" Version="2.0.9" />
+    <PackageReference Include="Penguin.Messaging.Persistence" Version="2.0.6" />
+    <PackageReference Include="Penguin.Persistence.Abstractions" Version="1.2.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\License.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
