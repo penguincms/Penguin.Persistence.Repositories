@@ -411,6 +411,13 @@
             </summary>
             <returns> a new write context for the underlying persistence context</returns>
         </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.OfType``1">
+            <summary>
+            Returns objects from the repository of the specified type, for repositories where more than one type exist
+            </summary>
+            <typeparam name="TDerived">The type to return</typeparam>
+            <returns></returns>
+        </member>
         <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.MessageBus">
             <summary>
             An optional message bus for sending out persistence event messages

@@ -192,7 +192,15 @@ namespace Penguin.Persistence.Repositories
         IEnumerator IEnumerable.GetEnumerator() => this.Context.GetEnumerator();
 
         void IRepository.Update(params object[] o) => this.Update(o.Cast<T>().ToArray());
+
+        /// <summary>
+        /// Returns objects from the repository of the specified type, for repositories where more than one type exist
+        /// </summary>
+        /// <typeparam name="TDerived">The type to return</typeparam>
+        /// <returns></returns>
         public IQueryable<TDerived> OfType<TDerived>() where TDerived : T => this.Context.OfType<TDerived>();
+
+        List<object> IRepository.Get() => this.Context.ToList().Cast<object>().ToList();
 
         #endregion Methods
 
