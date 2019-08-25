@@ -48,6 +48,12 @@ namespace Penguin.Persistence.Repositories.Interfaces
         /// <returns>an IEnumerable of entities where the External Id is found in the provided list</returns>
         IEnumerable Get(params string[] ExternalIds);
 
+        /// <summary>
+        /// Gets all objects in the repository
+        /// </summary>
+        /// <returns>All objects in the repository</returns>
+        new IList<Entity> Get();
+
         #endregion Methods
     }
     /// <summary>

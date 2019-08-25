@@ -162,6 +162,12 @@
             <param name="ExternalIds">The list of External Ids to search for</param>
             <returns>an IEnumerable of entities where the External Id is found in the provided list</returns>
         </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepository.Get">
+            <summary>
+            Gets all objects in the repository
+            </summary>
+            <returns>All objects in the repository</returns>
+        </member>
         <member name="T:Penguin.Persistence.Repositories.Interfaces.IEntityRepositoryI`1">
             <summary>
             An interface representing the base repository for all entities that inherit from "Entity"
@@ -239,6 +245,12 @@
             </summary>
             <param name="Id">The ID property to get</param>
             <returns>An object (or null) matching the ID</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.Get">
+            <summary>
+            Gets all objects in the repository
+            </summary>
+            <returns>All objects in the repository</returns>
         </member>
         <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.Get(System.Int32[])">
             <summary>

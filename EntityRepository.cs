@@ -79,6 +79,7 @@ namespace Penguin.Persistence.Repositories
         /// <param name="guid">The Guid to look for</param>
         /// <returns>An object instance, or null</returns>
         public virtual T Get(Guid guid) => this.Get(new[] { guid }).SingleOrDefault();
+        IList<Entity> IEntityRepository.Get() => this.Context.ToList().Cast<Entity>().ToList();
 
         /// <summary>
         /// Retrieves an object instance from the persistence context by its Guid

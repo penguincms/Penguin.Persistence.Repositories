@@ -201,6 +201,7 @@ namespace Penguin.Persistence.Repositories
         public IQueryable<TDerived> OfType<TDerived>() where TDerived : T => this.Context.OfType<TDerived>();
 
         List<object> IRepository.Get() => this.Context.ToList().Cast<object>().ToList();
+        IList<KeyedObject> IKeyedObjectRepository.Get() => this.Context.ToList().Cast<KeyedObject>().ToList();
 
         #endregion Methods
 

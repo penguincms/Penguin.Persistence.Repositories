@@ -28,6 +28,12 @@ namespace Penguin.Persistence.Repositories.Interfaces
         object Get(int Id);
 
         /// <summary>
+        /// Gets all objects in the repository
+        /// </summary>
+        /// <returns>All objects in the repository</returns>
+        new IList<KeyedObject> Get();
+
+        /// <summary>
         /// Gets an IEnumerable of objects containing any that match the requested ID's
         /// </summary>
         /// <param name="Ids">The Ids to check for</param>
