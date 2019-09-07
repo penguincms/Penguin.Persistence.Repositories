@@ -319,7 +319,7 @@
         </member>
         <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.IsValid">
             <summary>
-            Returns a bool indicating whether or not the underlying persistence context contains a set for storing the 
+            Returns a bool indicating whether or not the underlying persistence context contains a set for storing the
             type represented by this repository
             </summary>
         </member>

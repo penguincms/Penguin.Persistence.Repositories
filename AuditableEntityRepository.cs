@@ -13,16 +13,10 @@ namespace Penguin.Persistence.Repositories
     /// <typeparam name="T">Any type inheriting from AuditableEntity</typeparam>
     public class AuditableEntityRepository<T> : EntityRepository<T> where T : AuditableEntity
     {
-        #region Properties
-
         /// <summary>
         /// An override to access all objects, does not return objects that have been deleted
         /// </summary>
         public override IQueryable<T> All => base.All.Where(e => e.DateDeleted == null);
-
-        #endregion Properties
-
-        #region Constructors
 
         /// <summary>
         /// Creates a new instance of the auditable entity repository
@@ -32,10 +26,6 @@ namespace Penguin.Persistence.Repositories
         public AuditableEntityRepository(IPersistenceContext<T> dbContext, MessageBus messageBus = null) : base(dbContext, messageBus)
         {
         }
-
-        #endregion Constructors
-
-        #region Methods
 
         /// <summary>
         /// A message handler for "Created" events to set the date created
@@ -73,7 +63,5 @@ namespace Penguin.Persistence.Repositories
 
             base.Update(update);
         }
-
-        #endregion Methods
     }
 }

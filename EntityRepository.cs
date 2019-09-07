@@ -15,8 +15,6 @@ namespace Penguin.Persistence.Repositories
     /// <typeparam name="T">Any CMS entity type</typeparam>
     public class EntityRepository<T> : KeyedObjectRepository<T>, IEntityRepository<T> where T : Entity
     {
-        #region Constructors
-
         /// <summary>
         /// Constructs a new instance of this repository
         /// </summary>
@@ -26,9 +24,6 @@ namespace Penguin.Persistence.Repositories
         {
         }
 
-        #endregion Constructors
-
-        #region Methods
         /// <summary>
         /// Gets an IEnumerable of objects based on the Guid
         /// </summary>
@@ -79,6 +74,7 @@ namespace Penguin.Persistence.Repositories
         /// <param name="guid">The Guid to look for</param>
         /// <returns>An object instance, or null</returns>
         public virtual T Get(Guid guid) => this.Get(new[] { guid }).SingleOrDefault();
+
         IList<Entity> IEntityRepository.Get() => this.Context.ToList().Cast<Entity>().ToList();
 
         /// <summary>
@@ -108,7 +104,5 @@ namespace Penguin.Persistence.Repositories
         /// <param name="ExternalId">The external ID of the object to retrieve</param>
         /// <returns>An object with the matching ExternalID or null</returns>
         object IEntityRepository.Get(string ExternalId) => this.Get(new[] { ExternalId }).SingleOrDefault();
-
-        #endregion Methods
     }
 }

@@ -18,8 +18,6 @@ namespace Penguin.Persistence.Repositories.Interfaces
     /// </summary>
     public interface IKeyedObjectRepository : IRepository
     {
-        #region Methods
-
         /// <summary>
         /// Gets an object by its ID property
         /// </summary>
@@ -39,8 +37,6 @@ namespace Penguin.Persistence.Repositories.Interfaces
         /// <param name="Ids">The Ids to check for</param>
         /// <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
         IEnumerable Get(params int[] Ids);
-
-        #endregion Methods
     }
 
     /// <summary>
@@ -65,8 +61,6 @@ namespace Penguin.Persistence.Repositories.Interfaces
     /// <typeparam name="T">Any KeyedObject type</typeparam>
     public interface IKeyedObjectRepositoryO<out T> : IRepositoryO<T>, IKeyedObjectRepository where T : KeyedObject
     {
-        #region Methods
-
         /// <summary>
         /// Gets an object by its ID property
         /// </summary>
@@ -80,7 +74,5 @@ namespace Penguin.Persistence.Repositories.Interfaces
         /// <param name="Ids">The Ids to check for</param>
         /// <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
         new IEnumerable<T> Get(params int[] Ids);
-
-        #endregion Methods
     }
 }

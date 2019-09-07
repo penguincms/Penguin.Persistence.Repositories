@@ -22,18 +22,17 @@ namespace Penguin.Persistence.Repositories
         ////This is needed to ensure that the assembly is marked as referenced in the manifest
         //private readonly Type x = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
 
-        #region Properties
+        /// <summary>
+        /// Returns the (possibly) overridden IQueriable used to access database by the underlying persistence context
+        /// </summary>
+        public virtual IQueryable<T> All => this.Context.All;
+
+        IQueryable IRepository.All => this.All;
 
         /// <summary>
         /// The underlying perisstence context that handles saving of the data this repository is accessing
         /// </summary>
         public IPersistenceContext<T> Context { get; internal set; }
-
-        /// <summary>
-        /// Returns the (possibly) overridden IQueriable used to access database by the underlying persistence context
-        /// </summary>
-        public virtual IQueryable<T> All => this.Context.All;
-        IQueryable IRepository.All => this.All;
 
         /// <summary>
         /// Returns the element type of the underlying persistence context
@@ -46,7 +45,7 @@ namespace Penguin.Persistence.Repositories
         public Expression Expression => this.All.Expression;
 
         /// <summary>
-        /// Returns a bool indicating whether or not the underlying persistence context contains a set for storing the 
+        /// Returns a bool indicating whether or not the underlying persistence context contains a set for storing the
         /// type represented by this repository
         /// </summary>
         public bool IsValid => (this.Context as IPersistenceContext).IsValid;
@@ -55,10 +54,6 @@ namespace Penguin.Persistence.Repositories
         /// Returns the Provider of the underlying PersistenceContext
         /// </summary>
         public IQueryProvider Provider => this.All.Provider;
-
-        #endregion Properties
-
-        #region Constructors
 
         /// <summary>
         /// Constructs a new instance of this repository
@@ -76,21 +71,21 @@ namespace Penguin.Persistence.Repositories
             this.Context = context;
         }
 
-        #endregion Constructors
-
-        #region Methods
-
         /// <summary>
         /// This should add a new object to the underlying data store
         /// </summary>
         /// <param name="o">The object(s) to add to the data store</param>
         public virtual void Add(params T[] o) => this.Context.Add(o);
 
+        void IRepository.Add(params object[] o) => this.Add(o.Cast<T>().ToArray());
+
         /// <summary>
         /// This should add a new object to the data store, or update an existing matching object
         /// </summary>
         /// <param name="o">The object(s) to add or update</param>
         public virtual void AddOrUpdate(params T[] o) => this.Context.AddOrUpdate(o);
+
+        void IRepository.AddOrUpdate(params object[] o) => this.AddOrUpdate(o.Cast<T>().ToArray());
 
         /// <summary>
         /// If all WriteContexts have been deregistered, this should persist any changes to the underlying data store
@@ -126,6 +121,8 @@ namespace Penguin.Persistence.Repositories
         {
         }
 
+        void IRepository.Delete(params object[] o) => this.Delete(o.Cast<T>().ToArray());
+
         /// <summary>
         /// Gets an IEnumerable of objects containing any that match the requested ID's
         /// </summary>
@@ -140,11 +137,28 @@ namespace Penguin.Persistence.Repositories
         /// <returns>An object (or null) matching the ID</returns>
         public virtual T Get(int Id) => this.Get(new[] { Id }).SingleOrDefault();
 
+        object IKeyedObjectRepository.Get(int Id) => this.Get(new[] { Id }).SingleOrDefault();
+
+        IEnumerable IKeyedObjectRepository.Get(params int[] Ids) => this.Get(Ids);
+
+        List<object> IRepository.Get() => this.Context.ToList().Cast<object>().ToList();
+
+        IList<KeyedObject> IKeyedObjectRepository.Get() => this.Context.ToList().Cast<KeyedObject>().ToList();
+
         /// <summary>
         /// This returns the Enumerator for the underlying IQueriable
         /// </summary>
         /// <returns>The Enumerator for the underlying IQueriable</returns>
         public IEnumerator<T> GetEnumerator() => this.Context.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => this.Context.GetEnumerator();
+
+        /// <summary>
+        /// Returns objects from the repository of the specified type, for repositories where more than one type exist
+        /// </summary>
+        /// <typeparam name="TDerived">The type to return</typeparam>
+        /// <returns></returns>
+        public IQueryable<TDerived> OfType<TDerived>() where TDerived : T => this.Context.OfType<TDerived>();
 
         /// <summary>
         /// This should update any objects that already exist in the underlying data store
@@ -159,6 +173,8 @@ namespace Penguin.Persistence.Repositories
         public virtual void Update(Updating<T> update)
         {
         }
+
+        void IRepository.Update(params object[] o) => this.Update(o.Cast<T>().ToArray());
 
         /// <summary>
         /// Allows for a "Where" call on a non generic instance by converting the provided expression tree to the implemented type
@@ -178,32 +194,6 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <returns> a new write context for the underlying persistence context</returns>
         public IWriteContext WriteContext() => this.Context.WriteContext();
-
-        void IRepository.Add(params object[] o) => this.Add(o.Cast<T>().ToArray());
-
-        void IRepository.AddOrUpdate(params object[] o) => this.AddOrUpdate(o.Cast<T>().ToArray());
-
-        void IRepository.Delete(params object[] o) => this.Delete(o.Cast<T>().ToArray());
-
-        object IKeyedObjectRepository.Get(int Id) => this.Get(new[] { Id }).SingleOrDefault();
-
-        IEnumerable IKeyedObjectRepository.Get(params int[] Ids) => this.Get(Ids);
-
-        IEnumerator IEnumerable.GetEnumerator() => this.Context.GetEnumerator();
-
-        void IRepository.Update(params object[] o) => this.Update(o.Cast<T>().ToArray());
-
-        /// <summary>
-        /// Returns objects from the repository of the specified type, for repositories where more than one type exist
-        /// </summary>
-        /// <typeparam name="TDerived">The type to return</typeparam>
-        /// <returns></returns>
-        public IQueryable<TDerived> OfType<TDerived>() where TDerived : T => this.Context.OfType<TDerived>();
-
-        List<object> IRepository.Get() => this.Context.ToList().Cast<object>().ToList();
-        IList<KeyedObject> IKeyedObjectRepository.Get() => this.Context.ToList().Cast<KeyedObject>().ToList();
-
-        #endregion Methods
 
         /// <summary>
         /// An optional message bus for sending out persistence event messages
