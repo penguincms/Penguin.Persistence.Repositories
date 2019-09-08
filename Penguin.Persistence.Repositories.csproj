@@ -7,7 +7,7 @@
     <PackageLicenseFile>License.txt</PackageLicenseFile>
     <PackageProjectUrl>http://www.Frameworkms.com</PackageProjectUrl>
 	  <PackageIconUrl>http://www.penguinms.com/client/images/pg.png</PackageIconUrl>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	<Description>Abstract objects and interfaces for use with Penguin.Persistence.Abstractions created to convert EntityFramework contexts to a repository pattern allowing for applications to decouple from EF and allow for other data providers.</Description> 

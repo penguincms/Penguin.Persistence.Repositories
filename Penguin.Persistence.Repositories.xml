@@ -297,14 +297,14 @@
             </summary>
             <typeparam name="T">Any object type inheriting from "KeyedObject" </typeparam>
         </member>
-        <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Context">
-            <summary>
-            The underlying perisstence context that handles saving of the data this repository is accessing
-            </summary>
-        </member>
         <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.All">
             <summary>
             Returns the (possibly) overridden IQueriable used to access database by the underlying persistence context
+            </summary>
+        </member>
+        <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Context">
+            <summary>
+            The underlying perisstence context that handles saving of the data this repository is accessing
             </summary>
         </member>
         <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.ElementType">
@@ -397,6 +397,13 @@
             </summary>
             <returns>The Enumerator for the underlying IQueriable</returns>
         </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.OfType``1">
+            <summary>
+            Returns objects from the repository of the specified type, for repositories where more than one type exist
+            </summary>
+            <typeparam name="TDerived">The type to return</typeparam>
+            <returns></returns>
+        </member>
         <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Update(`0[])">
             <summary>
             This should update any objects that already exist in the underlying data store
@@ -422,13 +429,6 @@
             Returns a new write context for the underlying persistence context
             </summary>
             <returns> a new write context for the underlying persistence context</returns>
-        </member>
-        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.OfType``1">
-            <summary>
-            Returns objects from the repository of the specified type, for repositories where more than one type exist
-            </summary>
-            <typeparam name="TDerived">The type to return</typeparam>
-            <returns></returns>
         </member>
         <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.MessageBus">
             <summary>

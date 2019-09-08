@@ -64,7 +64,7 @@ namespace Penguin.Persistence.Repositories
         {
             if (context is null)
             {
-                throw new ArgumentNullException($"Can not create instance of {this.GetType().FullName} with null context of type {this.GetType().FullName}");
+                throw new ArgumentNullException($"Can not create instance of {this.GetType()} with null context of type {typeof(IPersistenceContext<T>)}");
             }
 
             this.MessageBus = messageBus;
