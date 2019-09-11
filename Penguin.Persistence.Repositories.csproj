@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
-    <PackageProjectUrl>http://www.Frameworkms.com</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/penguincms/Penguin.Persistence.Repositories</PackageProjectUrl>
 	  <PackageIconUrl>http://www.penguinms.com/client/images/pg.png</PackageIconUrl>
     <Version>1.2.2</Version>
     <IncludeSymbols>true</IncludeSymbols>
