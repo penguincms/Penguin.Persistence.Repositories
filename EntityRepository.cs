@@ -56,7 +56,20 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="o">The matching objects to return</param>
         /// <returns>The matching objects</returns>
-        public IEnumerable<T> Get(params T[] o) => this.Get(o.Select(e => e.Guid).ToArray());
+        public override IEnumerable<T> Get(params T[] o)
+        {
+            foreach (T to in o)
+            {
+                if (to._Id == 0)
+                {
+                    yield return this.Get(to._Id);
+                }
+                else
+                {
+                    yield return this.Get(to.Guid);
+                }
+            }
+        }
 
         //Id might be 0 for static representations of entities. This should only be true for security groups
         //Which have a guid generated based on their external ID. If both properties are null, you're boned.

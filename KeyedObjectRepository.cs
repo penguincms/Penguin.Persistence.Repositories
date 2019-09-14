@@ -128,14 +128,36 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="Ids">The Ids to check for</param>
         /// <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
-        public virtual IEnumerable<T> Get(params int[] Ids) => this.Where(t => Ids.Contains(t._Id));
+        public virtual IEnumerable<T> Get(params int[] Ids)
+        {
+            foreach (int i in Ids)
+            {
+                yield return Context.Get(i);
+            }
+        }
+
+        /// <summary>
+        /// Gets an IEnumerable of objects from the Persistence Context that match the provided list. Useful for refreshing from the context
+        /// </summary>
+        /// <param name="o">The matching objects to return</param>
+        /// <returns>The matching objects</returns>
+        public virtual IEnumerable<T> Get(params T[] o)
+        {
+            foreach (T to in o)
+            {
+                if (to._Id == 0)
+                {
+                    yield return this.Get(to._Id);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets an object by its ID property
         /// </summary>
         /// <param name="Id">The ID property to get</param>
         /// <returns>An object (or null) matching the ID</returns>
-        public virtual T Get(int Id) => this.Get(new[] { Id }).SingleOrDefault();
+        public virtual T Get(int Id) => this.Get(new[] { Id }).FirstOrDefault();
 
         object IKeyedObjectRepository.Get(int Id) => this.Get(new[] { Id }).SingleOrDefault();
 

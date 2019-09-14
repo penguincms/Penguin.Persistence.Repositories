@@ -384,6 +384,13 @@
             <param name="Ids">The Ids to check for</param>
             <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
         </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Get(`0[])">
+            <summary>
+            Gets an IEnumerable of objects from the Persistence Context that match the provided list. Useful for refreshing from the context
+            </summary>
+            <param name="o">The matching objects to return</param>
+            <returns>The matching objects</returns>
+        </member>
         <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Get(System.Int32)">
             <summary>
             Gets an object by its ID property
