@@ -3,6 +3,7 @@ using Penguin.Messaging.Core;
 using Penguin.Messaging.Persistence.Messages;
 using Penguin.Persistence.Abstractions.Interfaces;
 using System;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Penguin.Persistence.Repositories
@@ -11,6 +12,7 @@ namespace Penguin.Persistence.Repositories
     /// The base repository for entites that should have changes tracked and logged
     /// </summary>
     /// <typeparam name="T">Any type inheriting from AuditableEntity</typeparam>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "<Pending>")]
     public class AuditableEntityRepository<T> : EntityRepository<T> where T : AuditableEntity
     {
         /// <summary>
@@ -30,12 +32,14 @@ namespace Penguin.Persistence.Repositories
         /// <summary>
         /// A message handler for "Created" events to set the date created
         /// </summary>
-        /// <param name="create">The object message containing the object</param>
-        public override void Create(Creating<T> create)
+        /// <param name="createMessage">The object message containing the object</param>
+        public override void Create(Creating<T> createMessage)
         {
-            create.Target.DateCreated = DateTime.Now;
+            Contract.Requires(createMessage != null);
 
-            base.Create(create);
+            createMessage.Target.DateCreated = DateTime.Now;
+
+            base.Create(createMessage);
         }
 
         /// <summary>
@@ -56,12 +60,14 @@ namespace Penguin.Persistence.Repositories
         /// <summary>
         /// A message handler for the "Update" event that sets the modified property
         /// </summary>
-        /// <param name="update"></param>
-        public override void Update(Updating<T> update)
+        /// <param name="updateMessage"></param>
+        public override void Update(Updating<T> updateMessage)
         {
-            update.Target.DateModified = DateTime.Now;
+            Contract.Requires(updateMessage != null);
 
-            base.Update(update);
+            updateMessage.Target.DateModified = DateTime.Now;
+
+            base.Update(updateMessage);
         }
     }
 }

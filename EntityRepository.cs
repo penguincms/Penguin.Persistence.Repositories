@@ -5,6 +5,7 @@ using Penguin.Persistence.Repositories.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Penguin.Persistence.Repositories
@@ -13,6 +14,7 @@ namespace Penguin.Persistence.Repositories
     /// The base repository responsible for managing all CMS entities
     /// </summary>
     /// <typeparam name="T">Any CMS entity type</typeparam>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "<Pending>")]
     public class EntityRepository<T> : KeyedObjectRepository<T>, IEntityRepository<T> where T : Entity
     {
         /// <summary>
@@ -29,7 +31,7 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="guids">The guids to search for</param>
         /// <returns>A list of entities where their ID was found in the provided list</returns>
-        public virtual IEnumerable<T> Get(params Guid[] guids)
+        public virtual IEnumerable<T> Find(params Guid[] guids)
         {
             return this.Where(e => guids.Contains(e.Guid));
         }
@@ -39,14 +41,14 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="ExternalId">The external ID of the object to retrieve</param>
         /// <returns>An object with the matching ExternalID or null</returns>
-        public virtual T Get(string ExternalId) => this.Get(new[] { ExternalId }).SingleOrDefault();
+        public virtual T Find(string ExternalId) => this.Find(new[] { ExternalId }).SingleOrDefault();
 
         /// <summary>
         /// Gets an IEnumerable of objects based on the External Ids
         /// </summary>
         /// <param name="ExternalIds">The External Ids to search for</param>
         /// <returns>A list of entities where their ID was found in the provided list</returns>
-        public virtual IEnumerable<T> Get(params string[] ExternalIds)
+        public virtual IEnumerable<T> Find(params string[] ExternalIds)
         {
             return this.Where(e => ExternalIds.Contains(e.ExternalId));
         }
@@ -56,17 +58,17 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="o">The matching objects to return</param>
         /// <returns>The matching objects</returns>
-        public override IEnumerable<T> Get(params T[] o)
+        public override IEnumerable<T> Find(params T[] o)
         {
             foreach (T to in o)
             {
                 if (to._Id == 0)
                 {
-                    yield return this.Get(to._Id);
+                    yield return this.Find(to._Id);
                 }
                 else
                 {
-                    yield return this.Get(to.Guid);
+                    yield return this.Find(to.Guid);
                 }
             }
         }
@@ -79,43 +81,48 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="o">the object to search for</param>
         /// <returns>The persistence context version of the object</returns>
-        public T Get(T o) => o._Id == 0 ? this.Get(o.Guid) : this.Get(o._Id);
+        public T Find(T o)
+        {
+            Contract.Requires(o != null);
+            return o._Id == 0 ? this.Find(o.Guid) : this.Find(o._Id);
+        }
 
         /// <summary>
         /// Retrieves an object instance from the persistence context by its Guid
         /// </summary>
         /// <param name="guid">The Guid to look for</param>
         /// <returns>An object instance, or null</returns>
-        public virtual T Get(Guid guid) => this.Get(new[] { guid }).SingleOrDefault();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>")]
+        public virtual T Find(Guid guid) => this.Find(new[] { guid }).SingleOrDefault();
 
-        IList<Entity> IEntityRepository.Get() => this.Context.ToList().Cast<Entity>().ToList();
+        IList<Entity> IEntityRepository.Find() => this.Context.ToList().Cast<Entity>().ToList();
 
         /// <summary>
         /// Retrieves an object instance from the persistence context by its Guid
         /// </summary>
         /// <param name="guid">The Guid to look for</param>
         /// <returns>An object instance, or null</returns>
-        object IEntityRepository.Get(Guid guid) => this.Get(new[] { guid }).SingleOrDefault();
+        object IEntityRepository.Find(Guid guid) => this.Find(new[] { guid }).SingleOrDefault();
 
         /// <summary>
         /// Gets an IEnumerable of objects based on the Guid
         /// </summary>
         /// <param name="guids">The guids to search for</param>
         /// <returns>A list of entities where their ID was found in the provided list</returns>
-        IEnumerable IEntityRepository.Get(params Guid[] guids) => this.Get(guids);
+        IEnumerable IEntityRepository.Find(params Guid[] guids) => this.Find(guids);
 
         /// <summary>
         /// Gets an IEnumerable of objects based on the External Ids
         /// </summary>
         /// <param name="ExternalIds">The External Ids to search for</param>
         /// <returns>A list of entities where their ID was found in the provided list</returns>
-        IEnumerable IEntityRepository.Get(params string[] ExternalIds) => this.Get(ExternalIds);
+        IEnumerable IEntityRepository.Find(params string[] ExternalIds) => this.Find(ExternalIds);
 
         /// <summary>
         /// Gets an entity based on its external id
         /// </summary>
         /// <param name="ExternalId">The external ID of the object to retrieve</param>
         /// <returns>An object with the matching ExternalID or null</returns>
-        object IEntityRepository.Get(string ExternalId) => this.Get(new[] { ExternalId }).SingleOrDefault();
+        object IEntityRepository.Find(string ExternalId) => this.Find(new[] { ExternalId }).SingleOrDefault();
     }
 }

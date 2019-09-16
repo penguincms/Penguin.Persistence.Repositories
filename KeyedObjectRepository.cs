@@ -7,6 +7,7 @@ using Penguin.Persistence.Repositories.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace Penguin.Persistence.Repositories
     /// Base repository for any objects inheriting from "Keyed Object"
     /// </summary>
     /// <typeparam name="T">Any object type inheriting from "KeyedObject" </typeparam>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "<Pending>")]
     public class KeyedObjectRepository<T> : IKeyedObjectRepository<T>, IMessageHandler where T : KeyedObject
     {
         ////This is needed to ensure that the assembly is marked as referenced in the manifest
@@ -116,8 +118,8 @@ namespace Penguin.Persistence.Repositories
         /// <summary>
         /// Should handle any pre-Delete persistence messages for the type this repository represents
         /// </summary>
-        /// <param name="delete">A delete message containing the object being deleted</param>
-        public virtual void Delete(Deleting<T> delete)
+        /// <param name="deleteMessage">A delete message containing the object being deleted</param>
+        public virtual void Delete(Deleting<T> deleteMessage)
         {
         }
 
@@ -128,11 +130,11 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="Ids">The Ids to check for</param>
         /// <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
-        public virtual IEnumerable<T> Get(params int[] Ids)
+        public virtual IEnumerable<T> Find(params int[] Ids)
         {
             foreach (int i in Ids)
             {
-                yield return Context.Get(i);
+                yield return Context.Find(i);
             }
         }
 
@@ -141,13 +143,13 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="o">The matching objects to return</param>
         /// <returns>The matching objects</returns>
-        public virtual IEnumerable<T> Get(params T[] o)
+        public virtual IEnumerable<T> Find(params T[] o)
         {
             foreach (T to in o)
             {
                 if (to._Id == 0)
                 {
-                    yield return this.Get(to._Id);
+                    yield return this.Find(to._Id);
                 }
             }
         }
@@ -157,15 +159,15 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="Id">The ID property to get</param>
         /// <returns>An object (or null) matching the ID</returns>
-        public virtual T Get(int Id) => this.Get(new[] { Id }).FirstOrDefault();
+        public virtual T Find(int Id) => this.Find(new[] { Id }).FirstOrDefault();
 
-        object IKeyedObjectRepository.Get(int Id) => this.Get(new[] { Id }).SingleOrDefault();
+        object IKeyedObjectRepository.Find(int Id) => this.Find(new[] { Id }).SingleOrDefault();
 
-        IEnumerable IKeyedObjectRepository.Get(params int[] Ids) => this.Get(Ids);
+        IEnumerable IKeyedObjectRepository.Find(params int[] Ids) => this.Find(Ids);
 
-        List<object> IRepository.Get() => this.Context.ToList().Cast<object>().ToList();
+        List<object> IRepository.Find() => this.Context.ToList().Cast<object>().ToList();
 
-        IList<KeyedObject> IKeyedObjectRepository.Get() => this.Context.ToList().Cast<KeyedObject>().ToList();
+        IList<KeyedObject> IKeyedObjectRepository.Find() => this.Context.ToList().Cast<KeyedObject>().ToList();
 
         /// <summary>
         /// This returns the Enumerator for the underlying IQueriable
@@ -206,6 +208,8 @@ namespace Penguin.Persistence.Repositories
         /// <returns>The results of evaluating the expression against the underlying IQueriable</returns>
         public IEnumerable<T1> Where<T1>(Expression<Func<T1, bool>> predicate) where T1 : class
         {
+            Contract.Requires(predicate != null);
+
             Expression<Func<T, bool>> derivedExpr = Expression.Lambda<Func<T, bool>>(predicate.Body, predicate.Parameters);
 
             return this.Context.Where(derivedExpr).ToList().Cast<T1>();
