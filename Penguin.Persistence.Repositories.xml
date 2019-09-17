@@ -260,24 +260,6 @@
             <param name="Ids">The Ids to check for</param>
             <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.AddCopy(System.Object)">
-            <summary>
-            Resets the object unique fields and adds a copy to the context
-            </summary>
-            <param name="o">The object to copy and add</param>
-        </member>
-        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.AddOrUpdateCopy(System.Object)">
-            <summary>
-            Resets the object unique fields and adds or updates a copy to the context
-            </summary>
-            <param name="o">The object to copy and add</param>
-        </member>
-        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.ShallowClone(System.Object)">
-            <summary>
-            Creates a shallow clone of an object with new keys
-            </summary>
-            <param name="o">The object to clone</param>
-        </member>
         <member name="T:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepositoryI`1">
             <summary>
             An interface representing a repository that manages objects deriving from KeyedObject
@@ -315,24 +297,6 @@
             An interface representing a repository that manages objects deriving from KeyedObject
             </summary>
             <typeparam name="T">Any KeyedObject type</typeparam>
-        </member>
-        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository`1.AddCopy(`0)">
-            <summary>
-            Resets the object unique fields and adds a copy to the context
-            </summary>
-            <param name="o">The object to copy and add</param>
-        </member>
-        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository`1.AddOrUpdateCopy(`0)">
-            <summary>
-            Resets the object unique fields and adds or updates a copy to the context
-            </summary>
-            <param name="o">The object to copy and add</param>
-        </member>
-        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository`1.ShallowClone(`0)">
-            <summary>
-            Creates a shallow clone of an object with new keys
-            </summary>
-            <param name="o">The object to clone</param>
         </member>
         <member name="T:Penguin.Persistence.Repositories.KeyedObjectRepository`1">
             <summary>

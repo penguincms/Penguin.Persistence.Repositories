@@ -29,23 +29,5 @@ namespace Penguin.Persistence.Repositories.Interfaces
         /// <param name="Ids">The Ids to check for</param>
         /// <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
         IEnumerable Find(params int[] Ids);
-
-        /// <summary>
-        /// Resets the object unique fields and adds a copy to the context
-        /// </summary>
-        /// <param name="o">The object to copy and add</param>
-        void AddCopy(object o);
-
-        /// <summary>
-        /// Resets the object unique fields and adds or updates a copy to the context
-        /// </summary>
-        /// <param name="o">The object to copy and add</param>
-        void AddOrUpdateCopy(object o);
-
-        /// <summary>
-        /// Creates a shallow clone of an object with new keys
-        /// </summary>
-        /// <param name="o">The object to clone</param>
-        object ShallowClone(object o);
     }
 }
