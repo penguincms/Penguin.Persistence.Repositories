@@ -1,0 +1,491 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Penguin.Persistence.Repositories</name>
+    </assembly>
+    <members>
+        <member name="T:Penguin.Persistence.Repositories.AuditableEntityRepository`1">
+            <summary>
+            The base repository for entites that should have changes tracked and logged
+            </summary>
+            <typeparam name="T">Any type inheriting from AuditableEntity</typeparam>
+        </member>
+        <member name="P:Penguin.Persistence.Repositories.AuditableEntityRepository`1.All">
+            <summary>
+            An override to access all objects, does not return objects that have been deleted
+            </summary>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.AuditableEntityRepository`1.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{`0},Penguin.Messaging.Core.MessageBus)">
+            <summary>
+            Creates a new instance of the auditable entity repository
+            </summary>
+            <param name="dbContext"></param>
+            <param name="messageBus"></param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.AuditableEntityRepository`1.Create(Penguin.Messaging.Persistence.Messages.Creating{`0})">
+            <summary>
+            A message handler for "Created" events to set the date created
+            </summary>
+            <param name="createMessage">The object message containing the object</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.AuditableEntityRepository`1.Delete(`0[])">
+            <summary>
+            An overload for the underlying "Delete" event that sets the relevant modified and deleted properties
+            </summary>
+            <param name="o">The objects to delete</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.AuditableEntityRepository`1.Update(Penguin.Messaging.Persistence.Messages.Updating{`0})">
+            <summary>
+            A message handler for the "Update" event that sets the modified property
+            </summary>
+            <param name="updateMessage"></param>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.EntityRepository`1">
+            <summary>
+            The base repository responsible for managing all CMS entities
+            </summary>
+            <typeparam name="T">Any CMS entity type</typeparam>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{`0},Penguin.Messaging.Core.MessageBus)">
+            <summary>
+            Constructs a new instance of this repository
+            </summary>
+            <param name="dbContext">Any persistence context for this entity</param>
+            <param name="messageBus">An optional message bus to use for persistence messages</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.ShallowClone(`0)">
+            <summary>
+            ShallowClones and object and resets its Guid/ExternalId/Id
+            </summary>
+            <param name="o">The object to clone</param>
+            <returns>A clone of the object</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Find(System.Guid[])">
+            <summary>
+            Gets an IEnumerable of objects based on the Guid
+            </summary>
+            <param name="guids">The guids to search for</param>
+            <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Find(System.String)">
+            <summary>
+            Gets an entity based on its external id
+            </summary>
+            <param name="ExternalId">The external ID of the object to retrieve</param>
+            <returns>An object with the matching ExternalID or null</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Find(System.String[])">
+            <summary>
+            Gets an IEnumerable of objects based on the External Ids
+            </summary>
+            <param name="ExternalIds">The External Ids to search for</param>
+            <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Find(`0[])">
+            <summary>
+            Gets an IEnumerable of objects from the Persistence Context that match the provided list. Useful for refreshing from the context
+            </summary>
+            <param name="o">The matching objects to return</param>
+            <returns>The matching objects</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Find(`0)">
+            <summary>
+            Gets any individual object based on its Id (if saved) or its Guid (if not)
+            </summary>
+            <param name="o">the object to search for</param>
+            <returns>The persistence context version of the object</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Find(System.Guid)">
+            <summary>
+            Retrieves an object instance from the persistence context by its Guid
+            </summary>
+            <param name="guid">The Guid to look for</param>
+            <returns>An object instance, or null</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Penguin#Persistence#Repositories#Interfaces#IEntityRepository#Find(System.Guid)">
+            <summary>
+            Retrieves an object instance from the persistence context by its Guid
+            </summary>
+            <param name="guid">The Guid to look for</param>
+            <returns>An object instance, or null</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Penguin#Persistence#Repositories#Interfaces#IEntityRepository#Find(System.Guid[])">
+            <summary>
+            Gets an IEnumerable of objects based on the Guid
+            </summary>
+            <param name="guids">The guids to search for</param>
+            <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Penguin#Persistence#Repositories#Interfaces#IEntityRepository#Find(System.String[])">
+            <summary>
+            Gets an IEnumerable of objects based on the External Ids
+            </summary>
+            <param name="ExternalIds">The External Ids to search for</param>
+            <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Penguin#Persistence#Repositories#Interfaces#IEntityRepository#Find(System.String)">
+            <summary>
+            Gets an entity based on its external id
+            </summary>
+            <param name="ExternalId">The external ID of the object to retrieve</param>
+            <returns>An object with the matching ExternalID or null</returns>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.Interfaces.IEntityRepository">
+            <summary>
+            An nongeneric interface representing the base repository for all entities that inherit from "Entity"
+            </summary>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepository.Find(System.Guid)">
+            <summary>
+            Gets an entity by its guid
+            </summary>
+            <param name="guid">The guid to get</param>
+            <returns>An entity matching the Guid, or null</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepository.Find(System.String)">
+            <summary>
+            Gets an entity by its external ID
+            </summary>
+            <param name="ExternalId">The external Id of the entity to get</param>
+            <returns>An entity with a matching external Id, or null</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepository.Find(System.Guid[])">
+            <summary>
+            Gets an IEnumerable of entities where the Guid is found in the provided list
+            </summary>
+            <param name="guids">The list of Guids to search for</param>
+            <returns>an IEnumerable of entities where the Guid is found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepository.Find(System.String[])">
+            <summary>
+            Gets an IEnumerable of entities where the External Id is found in the provided list
+            </summary>
+            <param name="ExternalIds">The list of External Ids to search for</param>
+            <returns>an IEnumerable of entities where the External Id is found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepository.Find">
+            <summary>
+            Gets all objects in the repository
+            </summary>
+            <returns>All objects in the repository</returns>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.Interfaces.IEntityRepositoryI`1">
+            <summary>
+            An interface representing the base repository for all entities that inherit from "Entity"
+            </summary>
+            <typeparam name="T">Any Entity Type</typeparam>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.Interfaces.IEntityRepositoryIO`1">
+            <summary>
+            An interface representing the base repository for all entities that inherit from "Entity"
+            </summary>
+            <typeparam name="T">Any Entity Type</typeparam>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepositoryIO`1.Find(`0[])">
+            <summary>
+            Gets a new instance from the internal method of storage of any entities that match the provided list
+            </summary>
+            <param name="o">Any entity(s) to return from the internal method of storage</param>
+            <returns></returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepositoryIO`1.Find(`0)">
+            <summary>
+            Gets a single entity from the internal method of storage matching the provided entity
+            </summary>
+            <param name="o">The entity to search for</param>
+            <returns>A matching entity from the internal storage</returns>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.Interfaces.IEntityRepositoryO`1">
+            <summary>
+            An interface representing the base repository for all entities that inherit from "Entity"
+            </summary>
+            <typeparam name="T">Any Entity Type</typeparam>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepositoryO`1.Find(System.Guid)">
+            <summary>
+            Gets an entity by its guid
+            </summary>
+            <param name="guid">The guid to get</param>
+            <returns>An entity matching the Guid, or null</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepositoryO`1.Find(System.String)">
+            <summary>
+            Gets an entity by its external ID
+            </summary>
+            <param name="ExternalId">The external Id of the entity to get</param>
+            <returns>An entity with a matching external Id, or null</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepositoryO`1.Find(System.Guid[])">
+            <summary>
+            Gets an IEnumerable of entities where the Guid is found in the provided list
+            </summary>
+            <param name="guids">The list of Guids to search for</param>
+            <returns>an IEnumerable of entities where the Guid is found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepositoryO`1.Find(System.String[])">
+            <summary>
+            Gets an IEnumerable of entities where the External Id is found in the provided list
+            </summary>
+            <param name="ExternalIds">The list of External Ids to search for</param>
+            <returns>an IEnumerable of entities where the External Id is found in the provided list</returns>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.Interfaces.IEntityRepository`1">
+            <summary>
+            An interface representing the base repository for all entities that inherit from "Entity"
+            </summary>
+            <typeparam name="T">Any Entity Type</typeparam>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository">
+            <summary>
+            A non-generic interface for a keyed object repository allowing for data access without knowing the underlying object type for the repository
+            </summary>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.Find(System.Int32)">
+            <summary>
+            Gets an object by its ID property
+            </summary>
+            <param name="Id">The ID property to get</param>
+            <returns>An object (or null) matching the ID</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.Find">
+            <summary>
+            Gets all objects in the repository
+            </summary>
+            <returns>All objects in the repository</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.Find(System.Int32[])">
+            <summary>
+            Gets an IEnumerable of objects containing any that match the requested ID's
+            </summary>
+            <param name="Ids">The Ids to check for</param>
+            <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepositoryI`1">
+            <summary>
+            An interface representing a repository that manages objects deriving from KeyedObject
+            </summary>
+            <typeparam name="T">Any KeyedObject type</typeparam>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepositoryIO`1">
+            <summary>
+            An interface representing a repository that manages objects deriving from KeyedObject
+            </summary>
+            <typeparam name="T">Any KeyedObject type</typeparam>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepositoryO`1">
+            <summary>
+            An interface representing a repository that manages objects deriving from KeyedObject
+            </summary>
+            <typeparam name="T">Any KeyedObject type</typeparam>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepositoryO`1.Find(System.Int32)">
+            <summary>
+            Gets an object by its ID property
+            </summary>
+            <param name="Id">The ID property to get</param>
+            <returns>An object (or null) matching the ID</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepositoryO`1.Find(System.Int32[])">
+            <summary>
+            Gets an IEnumerable of objects containing any that match the requested ID's
+            </summary>
+            <param name="Ids">The Ids to check for</param>
+            <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository`1">
+            <summary>
+            An interface representing a repository that manages objects deriving from KeyedObject
+            </summary>
+            <typeparam name="T">Any KeyedObject type</typeparam>
+        </member>
+        <member name="T:Penguin.Persistence.Repositories.KeyedObjectRepository`1">
+            <summary>
+            Base repository for any objects inheriting from "Keyed Object"
+            </summary>
+            <typeparam name="T">Any object type inheriting from "KeyedObject" </typeparam>
+        </member>
+        <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.All">
+            <summary>
+            Returns the (possibly) overridden IQueriable used to access database by the underlying persistence context
+            </summary>
+        </member>
+        <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Context">
+            <summary>
+            The underlying perisstence context that handles saving of the data this repository is accessing
+            </summary>
+        </member>
+        <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.ElementType">
+            <summary>
+            Returns the element type of the underlying persistence context
+            </summary>
+        </member>
+        <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Expression">
+            <summary>
+            Returns the current expressions of the underlying persistence context
+            </summary>
+        </member>
+        <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.IsValid">
+            <summary>
+            Returns a bool indicating whether or not the underlying persistence context contains a set for storing the
+            type represented by this repository
+            </summary>
+        </member>
+        <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Provider">
+            <summary>
+            Returns the Provider of the underlying PersistenceContext
+            </summary>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.#ctor(Penguin.Persistence.Abstractions.Interfaces.IPersistenceContext{`0},Penguin.Messaging.Core.MessageBus)">
+            <summary>
+            Constructs a new instance of this repository
+            </summary>
+            <param name="context">A persistence context allowing for persistence of the objects this repository manages</param>
+            <param name="messageBus">An optional message bus for sending out persistence event messages</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Add(`0[])">
+            <summary>
+            This should add a new object to the underlying data store
+            </summary>
+            <param name="o">The object(s) to add to the data store</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AddOrUpdate(`0[])">
+            <summary>
+            This should add a new object to the data store, or update an existing matching object
+            </summary>
+            <param name="o">The object(s) to add or update</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Commit(Penguin.Persistence.Abstractions.Interfaces.IWriteContext)">
+            <summary>
+            If all WriteContexts have been deregistered, this should persist any changes to the underlying data store
+            </summary>
+            <param name="writeContext">The IWriteContext that has finished making changes</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.CommitASync(Penguin.Persistence.Abstractions.Interfaces.IWriteContext)">
+            <summary>
+            If all WriteContexts have been deregistered, this should persist any changes to the underlying data store in an ASYNC manner
+            </summary>
+            <param name="writeContext">The IWriteContext that has finished making changes</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Create(Penguin.Messaging.Persistence.Messages.Creating{`0})">
+            <summary>
+            Should handle any pre-create persistence messages for the type this repository represents
+            </summary>
+            <param name="create">A creatomg message containing the object being created</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Delete(`0[])">
+            <summary>
+            This should remove objects from the underlying data store, or make them inaccessible (if deleting is not prefered)
+            </summary>
+            <param name="o">The object(s) to remove from the data store</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Delete(Penguin.Messaging.Persistence.Messages.Deleting{`0})">
+            <summary>
+            Should handle any pre-Delete persistence messages for the type this repository represents
+            </summary>
+            <param name="deleteMessage">A delete message containing the object being deleted</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Find(System.Int32[])">
+            <summary>
+            Gets an IEnumerable of objects containing any that match the requested ID's
+            </summary>
+            <param name="Ids">The Ids to check for</param>
+            <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Find(`0[])">
+            <summary>
+            Gets an IEnumerable of objects from the Persistence Context that match the provided list. Useful for refreshing from the context
+            </summary>
+            <param name="o">The matching objects to return</param>
+            <returns>The matching objects</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Find(System.Int32)">
+            <summary>
+            Gets an object by its ID property
+            </summary>
+            <param name="Id">The ID property to get</param>
+            <returns>An object (or null) matching the ID</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.GetEnumerator">
+            <summary>
+            This returns the Enumerator for the underlying IQueriable
+            </summary>
+            <returns>The Enumerator for the underlying IQueriable</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.OfType``1">
+            <summary>
+            Returns objects from the repository of the specified type, for repositories where more than one type exist
+            </summary>
+            <typeparam name="TDerived">The type to return</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Update(`0[])">
+            <summary>
+            This should update any objects that already exist in the underlying data store
+            </summary>
+            <param name="o">The objects to update from the underlying data store</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Update(Penguin.Messaging.Persistence.Messages.Updating{`0})">
+            <summary>
+            This should handle any pre-update messages on derived repositories
+            </summary>
+            <param name="update">An update message containing the object being updated</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Where``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Allows for a "Where" call on a non generic instance by converting the provided expression tree to the implemented type
+            </summary>
+            <typeparam name="T1">An assumed type/base for this non-generic instance of the repository</typeparam>
+            <param name="predicate">The Expression to pass to the underlying IQueriable</param>
+            <returns>The results of evaluating the expression against the underlying IQueriable</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.WriteContext">
+            <summary>
+            Returns a new write context for the underlying persistence context
+            </summary>
+            <returns> a new write context for the underlying persistence context</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AddCopy(`0)">
+            <summary>
+            ShallowClones an object, resets the key, and then calls Add
+            </summary>
+            <param name="o">The object to clone</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.ShallowClone(`0)">
+            <summary>
+            ShallowClones an object and resets its key
+            </summary>
+            <param name="o">The object to clone</param>
+            <returns>The ShallowClone</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AddOrUpdateCopy(`0)">
+            <summary>
+            ShallowClones an object, resets the key, and then calls AddOrUpdate
+            </summary>
+            <param name="o">The object to clone</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AddCopy(System.Object)">
+            <summary>
+            ShallowClones an object, resets the key, and then calls Add
+            </summary>
+            <param name="o">The object to clone</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AddOrUpdateCopy(System.Object)">
+            <summary>
+            ShallowClones an object, resets the key, and then calls AddOrUpdate
+            </summary>
+            <param name="o">The object to clone</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.ShallowClone(System.Object)">
+            <summary>
+            ShallowClones an object and resets its Key
+            </summary>
+            <param name="o">The object to shallow clone</param>
+            <returns></returns>
+        </member>
+        <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.MessageBus">
+            <summary>
+            An optional message bus for sending out persistence event messages
+            </summary>
+        </member>
+    </members>
+</doc>
