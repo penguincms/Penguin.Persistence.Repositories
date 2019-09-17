@@ -27,6 +27,22 @@ namespace Penguin.Persistence.Repositories
         }
 
         /// <summary>
+        /// ShallowClones and object and resets its Guid/ExternalId/Id
+        /// </summary>
+        /// <param name="o">The object to clone</param>
+        /// <returns>A clone of the object</returns>
+        public override T ShallowClone(T o)
+        {
+            T newObject = base.ShallowClone(o);
+
+            newObject.Guid = Guid.NewGuid();
+
+            newObject.ExternalId = newObject.Guid.ToString();
+
+            return newObject;
+        }
+
+        /// <summary>
         /// Gets an IEnumerable of objects based on the Guid
         /// </summary>
         /// <param name="guids">The guids to search for</param>
@@ -124,5 +140,6 @@ namespace Penguin.Persistence.Repositories
         /// <param name="ExternalId">The external ID of the object to retrieve</param>
         /// <returns>An object with the matching ExternalID or null</returns>
         object IEntityRepository.Find(string ExternalId) => this.Find(new[] { ExternalId }).SingleOrDefault();
+
     }
 }

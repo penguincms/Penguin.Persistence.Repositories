@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
+using Penguin.Reflection.Extensions;
 using System.Threading.Tasks;
 
 namespace Penguin.Persistence.Repositories
@@ -222,8 +223,69 @@ namespace Penguin.Persistence.Repositories
         public IWriteContext WriteContext() => this.Context.WriteContext();
 
         /// <summary>
+        /// ShallowClones an object, resets the key, and then calls Add
+        /// </summary>
+        /// <param name="o">The object to clone</param>
+        public virtual void AddCopy(T o)
+        {
+            T newObject = o.ShallowClone();
+
+            newObject._Id = 0;
+
+            this.Add(newObject);
+        }
+
+        /// <summary>
+        /// ShallowClones an object and resets its key
+        /// </summary>
+        /// <param name="o">The object to clone</param>
+        /// <returns>The ShallowClone</returns>
+        public virtual T ShallowClone(T o)
+        {
+            T newObject = o.ShallowClone();
+
+            newObject._Id = 0;
+
+            return newObject;
+        }
+
+        /// <summary>
+        /// ShallowClones an object, resets the key, and then calls AddOrUpdate
+        /// </summary>
+        /// <param name="o">The object to clone</param>
+        public virtual void AddOrUpdateCopy(T o)
+        {
+            T newObject = o.ShallowClone();
+
+            newObject._Id = 0;
+
+            this.AddOrUpdate(newObject);
+        }
+
+        /// <summary>
+        /// ShallowClones an object, resets the key, and then calls Add
+        /// </summary>
+        /// <param name="o">The object to clone</param>
+        public void AddCopy(object o) => this.AddCopy(o as T);
+
+        /// <summary>
+        /// ShallowClones an object, resets the key, and then calls AddOrUpdate
+        /// </summary>
+        /// <param name="o">The object to clone</param>
+        public void AddOrUpdateCopy(object o) => this.AddOrUpdateCopy(o as T);
+
+        /// <summary>
+        /// ShallowClones an object and resets its Key
+        /// </summary>
+        /// <param name="o">The object to shallow clone</param>
+        /// <returns></returns>
+        public virtual object ShallowClone(object o) => this.ShallowClone(o as T);
+
+        /// <summary>
         /// An optional message bus for sending out persistence event messages
         /// </summary>
         protected MessageBus MessageBus { get; set; }
+
+        
     }
 }

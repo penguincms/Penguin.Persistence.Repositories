@@ -53,6 +53,13 @@
             <param name="dbContext">Any persistence context for this entity</param>
             <param name="messageBus">An optional message bus to use for persistence messages</param>
         </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.ShallowClone(`0)">
+            <summary>
+            ShallowClones and object and resets its Guid/ExternalId/Id
+            </summary>
+            <param name="o">The object to clone</param>
+            <returns>A clone of the object</returns>
+        </member>
         <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Find(System.Guid[])">
             <summary>
             Gets an IEnumerable of objects based on the Guid
@@ -253,6 +260,24 @@
             <param name="Ids">The Ids to check for</param>
             <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
         </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.AddCopy(System.Object)">
+            <summary>
+            Resets the object unique fields and adds a copy to the context
+            </summary>
+            <param name="o">The object to copy and add</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.AddOrUpdateCopy(System.Object)">
+            <summary>
+            Resets the object unique fields and adds or updates a copy to the context
+            </summary>
+            <param name="o">The object to copy and add</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository.ShallowClone(System.Object)">
+            <summary>
+            Creates a shallow clone of an object with new keys
+            </summary>
+            <param name="o">The object to clone</param>
+        </member>
         <member name="T:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepositoryI`1">
             <summary>
             An interface representing a repository that manages objects deriving from KeyedObject
@@ -290,6 +315,24 @@
             An interface representing a repository that manages objects deriving from KeyedObject
             </summary>
             <typeparam name="T">Any KeyedObject type</typeparam>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository`1.AddCopy(`0)">
+            <summary>
+            Resets the object unique fields and adds a copy to the context
+            </summary>
+            <param name="o">The object to copy and add</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository`1.AddOrUpdateCopy(`0)">
+            <summary>
+            Resets the object unique fields and adds or updates a copy to the context
+            </summary>
+            <param name="o">The object to copy and add</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IKeyedObjectRepository`1.ShallowClone(`0)">
+            <summary>
+            Creates a shallow clone of an object with new keys
+            </summary>
+            <param name="o">The object to clone</param>
         </member>
         <member name="T:Penguin.Persistence.Repositories.KeyedObjectRepository`1">
             <summary>
@@ -436,6 +479,44 @@
             Returns a new write context for the underlying persistence context
             </summary>
             <returns> a new write context for the underlying persistence context</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AddCopy(`0)">
+            <summary>
+            ShallowClones an object, resets the key, and then calls Add
+            </summary>
+            <param name="o">The object to clone</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.ShallowClone(`0)">
+            <summary>
+            ShallowClones an object and resets its key
+            </summary>
+            <param name="o">The object to clone</param>
+            <returns>The ShallowClone</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AddOrUpdateCopy(`0)">
+            <summary>
+            ShallowClones an object, resets the key, and then calls AddOrUpdate
+            </summary>
+            <param name="o">The object to clone</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AddCopy(System.Object)">
+            <summary>
+            ShallowClones an object, resets the key, and then calls Add
+            </summary>
+            <param name="o">The object to clone</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AddOrUpdateCopy(System.Object)">
+            <summary>
+            ShallowClones an object, resets the key, and then calls AddOrUpdate
+            </summary>
+            <param name="o">The object to clone</param>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.ShallowClone(System.Object)">
+            <summary>
+            ShallowClones an object and resets its Key
+            </summary>
+            <param name="o">The object to shallow clone</param>
+            <returns></returns>
         </member>
         <member name="P:Penguin.Persistence.Repositories.KeyedObjectRepository`1.MessageBus">
             <summary>

@@ -44,5 +44,7 @@ namespace Penguin.Persistence.Repositories.Interfaces
         /// </summary>
         /// <returns>All objects in the repository</returns>
         new IList<Entity> Find();
+
+        
     }
 }
