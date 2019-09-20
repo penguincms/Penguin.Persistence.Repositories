@@ -22,7 +22,7 @@
             <param name="dbContext"></param>
             <param name="messageBus"></param>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.AuditableEntityRepository`1.Create(Penguin.Messaging.Persistence.Messages.Creating{`0})">
+        <member name="M:Penguin.Persistence.Repositories.AuditableEntityRepository`1.AcceptMessage(Penguin.Messaging.Persistence.Messages.Creating{`0})">
             <summary>
             A message handler for "Created" events to set the date created
             </summary>
@@ -34,7 +34,7 @@
             </summary>
             <param name="o">The objects to delete</param>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.AuditableEntityRepository`1.Update(Penguin.Messaging.Persistence.Messages.Updating{`0})">
+        <member name="M:Penguin.Persistence.Repositories.AuditableEntityRepository`1.AcceptMessage(Penguin.Messaging.Persistence.Messages.Updating{`0})">
             <summary>
             A message handler for the "Update" event that sets the modified property
             </summary>
@@ -366,7 +366,7 @@
             </summary>
             <param name="writeContext">The IWriteContext that has finished making changes</param>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Create(Penguin.Messaging.Persistence.Messages.Creating{`0})">
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AcceptMessage(Penguin.Messaging.Persistence.Messages.Creating{`0})">
             <summary>
             Should handle any pre-create persistence messages for the type this repository represents
             </summary>
@@ -378,7 +378,7 @@
             </summary>
             <param name="o">The object(s) to remove from the data store</param>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Delete(Penguin.Messaging.Persistence.Messages.Deleting{`0})">
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AcceptMessage(Penguin.Messaging.Persistence.Messages.Deleting{`0})">
             <summary>
             Should handle any pre-Delete persistence messages for the type this repository represents
             </summary>
@@ -424,7 +424,7 @@
             </summary>
             <param name="o">The objects to update from the underlying data store</param>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Update(Penguin.Messaging.Persistence.Messages.Updating{`0})">
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.AcceptMessage(Penguin.Messaging.Persistence.Messages.Updating{`0})">
             <summary>
             This should handle any pre-update messages on derived repositories
             </summary>

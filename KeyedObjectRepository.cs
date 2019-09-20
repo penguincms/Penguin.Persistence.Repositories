@@ -20,7 +20,7 @@ namespace Penguin.Persistence.Repositories
     /// </summary>
     /// <typeparam name="T">Any object type inheriting from "KeyedObject" </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "<Pending>")]
-    public class KeyedObjectRepository<T> : IKeyedObjectRepository<T>, IMessageHandler where T : KeyedObject
+    public class KeyedObjectRepository<T> : IKeyedObjectRepository<T>, IMessageHandler<Creating<T>>, IMessageHandler<Updating<T>> , IMessageHandler<Deleting<T>> where T : KeyedObject
     {
         ////This is needed to ensure that the assembly is marked as referenced in the manifest
         //private readonly Type x = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
@@ -106,7 +106,7 @@ namespace Penguin.Persistence.Repositories
         /// Should handle any pre-create persistence messages for the type this repository represents
         /// </summary>
         /// <param name="create">A creatomg message containing the object being created</param>
-        public virtual void Create(Creating<T> create)
+        public virtual void AcceptMessage(Creating<T> create)
         {
         }
 
@@ -120,7 +120,7 @@ namespace Penguin.Persistence.Repositories
         /// Should handle any pre-Delete persistence messages for the type this repository represents
         /// </summary>
         /// <param name="deleteMessage">A delete message containing the object being deleted</param>
-        public virtual void Delete(Deleting<T> deleteMessage)
+        public virtual void AcceptMessage(Deleting<T> deleteMessage)
         {
         }
 
@@ -195,7 +195,7 @@ namespace Penguin.Persistence.Repositories
         /// This should handle any pre-update messages on derived repositories
         /// </summary>
         /// <param name="update">An update message containing the object being updated</param>
-        public virtual void Update(Updating<T> update)
+        public virtual void AcceptMessage(Updating<T> update)
         {
         }
 
