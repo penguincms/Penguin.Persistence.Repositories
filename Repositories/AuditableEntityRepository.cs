@@ -13,7 +13,7 @@ namespace Penguin.Persistence.Repositories
     /// The base repository for entites that should have changes tracked and logged
     /// </summary>
     /// <typeparam name="T">Any type inheriting from AuditableEntity</typeparam>
-    public class AuditableEntityRepository<T> : EntityRepository<T> where T : AuditableEntity, IMessageHandler<Deleting<T>>, IMessageHandler<Updating<T>>, IMessageHandler<Creating<T>>
+    public class AuditableEntityRepository<T> : EntityRepository<T>, IMessageHandler<Deleting<T>>, IMessageHandler<Updating<T>>, IMessageHandler<Creating<T>> where T : AuditableEntity
     {
         /// <summary>
         /// An override to access all objects, does not return objects that have been deleted
