@@ -15,13 +15,13 @@ namespace Penguin.Persistence.Repositories.Interfaces
         /// </summary>
         /// <param name="Id">The ID property to get</param>
         /// <returns>An object (or null) matching the ID</returns>
-        object Find(int Id);
+        KeyedObject Find(int Id);
 
         /// <summary>
         /// Gets an IEnumerable of objects containing any that match the requested ID's
         /// </summary>
         /// <param name="Ids">The Ids to check for</param>
         /// <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
-        IEnumerable FindRange(IEnumerable<int> Ids);
+        IEnumerable<KeyedObject> FindRange(IEnumerable<int> Ids);
     }
 }

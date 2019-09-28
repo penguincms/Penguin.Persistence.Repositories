@@ -103,21 +103,21 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="guid">The Guid to look for</param>
         /// <returns>An object instance, or null</returns>
-        object IEntityRepository.Find(Guid guid) => this.Find(new[] { guid }).SingleOrDefault();
+        Entity IEntityRepository.Find(Guid guid) => this.Find(new[] { guid }).SingleOrDefault();
 
         /// <summary>
         /// Gets an entity based on its external id
         /// </summary>
         /// <param name="ExternalId">The external ID of the object to retrieve</param>
         /// <returns>An object with the matching ExternalID or null</returns>
-        object IEntityRepository.Find(string ExternalId) => this.Find(new[] { ExternalId }).SingleOrDefault();
+        Entity IEntityRepository.Find(string ExternalId) => this.Find(new[] { ExternalId }).SingleOrDefault();
 
         /// <summary>
         /// Gets an IEnumerable of objects based on the Guid
         /// </summary>
         /// <param name="guids">The guids to search for</param>
         /// <returns>A list of entities where their ID was found in the provided list</returns>
-        IEnumerable IEntityRepository.FindRange(IEnumerable<Guid> guids)
+        IEnumerable<Entity> IEntityRepository.FindRange(IEnumerable<Guid> guids)
         {
             if (guids is null)
             {
@@ -140,7 +140,7 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="ExternalIds">The External Ids to search for</param>
         /// <returns>A list of entities where their ID was found in the provided list</returns>
-        IEnumerable IEntityRepository.FindRange(IEnumerable<string> ExternalIds)
+        IEnumerable<Entity> IEntityRepository.FindRange(IEnumerable<string> ExternalIds)
         {
             if (ExternalIds is null)
             {

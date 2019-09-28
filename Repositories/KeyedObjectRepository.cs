@@ -200,7 +200,7 @@ namespace Penguin.Persistence.Repositories
 
         object ICrud.Find(object Key) => this.Find((int)Key);
 
-        object IKeyedObjectRepository.Find(int Id) => this.Find(Id);
+        KeyedObject IKeyedObjectRepository.Find(int Id) => this.Find(Id);
 
         /// <summary>
         /// Finds a number of objects with matching Ids
@@ -213,7 +213,7 @@ namespace Penguin.Persistence.Repositories
 
         IEnumerable ICrud.FindRange(IEnumerable Key) => this.FindRange(Key.Cast<int>());
 
-        IEnumerable IKeyedObjectRepository.FindRange(IEnumerable<int> Ids) => this.FindRange(Ids);
+        IEnumerable<KeyedObject> IKeyedObjectRepository.FindRange(IEnumerable<int> Ids) => this.FindRange(Ids);
 
         /// <summary>
         /// This returns the Enumerator for the underlying IQueriable
