@@ -15,7 +15,6 @@ namespace Penguin.Persistence.Repositories.Interfaces
         /// </summary>
         /// <param name="guid">The guid to get</param>
         /// <returns>An entity matching the Guid, or null</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>")]
         object Find(Guid guid);
 
         /// <summary>
@@ -30,21 +29,13 @@ namespace Penguin.Persistence.Repositories.Interfaces
         /// </summary>
         /// <param name="guids">The list of Guids to search for</param>
         /// <returns>an IEnumerable of entities where the Guid is found in the provided list</returns>
-        IEnumerable Find(params Guid[] guids);
+        IEnumerable FindRange(IEnumerable<Guid> guids);
 
         /// <summary>
         /// Gets an IEnumerable of entities where the External Id is found in the provided list
         /// </summary>
         /// <param name="ExternalIds">The list of External Ids to search for</param>
         /// <returns>an IEnumerable of entities where the External Id is found in the provided list</returns>
-        IEnumerable Find(params string[] ExternalIds);
-
-        /// <summary>
-        /// Gets all objects in the repository
-        /// </summary>
-        /// <returns>All objects in the repository</returns>
-        new IList<Entity> Find();
-
-        
+        IEnumerable FindRange(IEnumerable<string> ExternalIds);
     }
 }

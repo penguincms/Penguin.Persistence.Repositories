@@ -18,16 +18,10 @@ namespace Penguin.Persistence.Repositories.Interfaces
         object Find(int Id);
 
         /// <summary>
-        /// Gets all objects in the repository
-        /// </summary>
-        /// <returns>All objects in the repository</returns>
-        new IList<KeyedObject> Find();
-
-        /// <summary>
         /// Gets an IEnumerable of objects containing any that match the requested ID's
         /// </summary>
         /// <param name="Ids">The Ids to check for</param>
         /// <returns>an IEnumerable of objects containing any that match the requested ID's</returns>
-        IEnumerable Find(params int[] Ids);
+        IEnumerable FindRange(IEnumerable<int> Ids);
     }
 }
