@@ -137,18 +137,7 @@ namespace Penguin.Persistence.Repositories
         /// Adds a range of new objects or updates existing objects if they already exist
         /// </summary>
         /// <param name="o">The objects to add or update</param>
-        public virtual void AddOrUpdateRange(IEnumerable<T> o)
-        {
-            if (o is null)
-            {
-                throw new ArgumentNullException(nameof(o), "Can not add null range");
-            }
-
-            foreach (T io in o)
-            {
-                this.AddOrUpdate(io);
-            }
-        }
+        public virtual void AddOrUpdateRange(IEnumerable<T> o) => this.Context.AddOrUpdateRange(o);
 
         void ICrud.AddOrUpdateRange(IEnumerable o) => this.AddOrUpdateRange(o.Cast<T>());
 
@@ -156,18 +145,7 @@ namespace Penguin.Persistence.Repositories
         /// Adds a range of new objects
         /// </summary>
         /// <param name="o">The objects to add</param>
-        public virtual void AddRange(IEnumerable<T> o)
-        {
-            if (o is null)
-            {
-                throw new ArgumentNullException(nameof(o), "Can not add null range");
-            }
-
-            foreach (T io in o)
-            {
-                this.Add(io);
-            }
-        }
+        public virtual void AddRange(IEnumerable<T> o) => this.Context.AddRange(o);
 
         void ICrud.AddRange(IEnumerable o) => this.AddRange(o.Cast<T>());
 
@@ -200,17 +178,7 @@ namespace Penguin.Persistence.Repositories
         /// Deletes multiple objects from the persistence context
         /// </summary>
         /// <param name="o">The objects to delete</param>
-        public virtual void DeleteRange(IEnumerable<T> o)
-        {
-            if (o is null)
-            {
-                throw new ArgumentNullException(nameof(o), "Can not delete null range");
-            }
-            foreach (T io in o)
-            {
-                this.Delete(io);
-            }
-        }
+        public virtual void DeleteRange(IEnumerable<T> o) => this.Context.DeleteRange(o);
 
         void ICrud.DeleteRange(IEnumerable o) => this.DeleteRange(o.Cast<T>());
 
@@ -219,18 +187,7 @@ namespace Penguin.Persistence.Repositories
         /// </summary>
         /// <param name="o">The matching objects to return</param>
         /// <returns>The matching objects</returns>
-        public virtual IEnumerable<T> Find(IEnumerable<T> o)
-        {
-            if (o is null)
-            {
-                throw new ArgumentNullException(nameof(o), "Can not search for null object IEnumerable");
-            }
-
-            foreach (T to in o)
-            {
-                yield return this.Find(to._Id);
-            }
-        }
+        public virtual IEnumerable<T> Find(IEnumerable<T> o) => this.Context.FindRange(o);
 
         /// <summary>
         /// Finds a KeyedObject by its int Id
@@ -308,17 +265,7 @@ namespace Penguin.Persistence.Repositories
         /// Updates a range of objects but does not add them to the context if they do not exist
         /// </summary>
         /// <param name="o">The objects to update</param>
-        public virtual void UpdateRange(IEnumerable<T> o)
-        {
-            if (o is null)
-            {
-                throw new ArgumentNullException(nameof(o), "Can not update null range");
-            }
-            foreach (T io in o)
-            {
-                this.Update(io);
-            }
-        }
+        public virtual void UpdateRange(IEnumerable<T> o) => this.Context.UpdateRange(o);
 
         void ICrud.UpdateRange(IEnumerable o) => this.UpdateRange(o.Cast<T>());
 
