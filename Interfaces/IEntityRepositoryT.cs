@@ -30,13 +30,13 @@ namespace Penguin.Persistence.Repositories.Interfaces
         /// </summary>
         /// <param name="guids">The list of Guids to search for</param>
         /// <returns>an IEnumerable of entities where the Guid is found in the provided list</returns>
-        IEnumerable<T> Find(params Guid[] guids);
+        IEnumerable<T> FindRange(IEnumerable<Guid> guids);
 
         /// <summary>
         /// Gets an IEnumerable of entities where the External Id is found in the provided list
         /// </summary>
         /// <param name="ExternalIds">The list of External Ids to search for</param>
         /// <returns>an IEnumerable of entities where the External Id is found in the provided list</returns>
-        IEnumerable<T> Find(params string[] ExternalIds);
+        IEnumerable<T> FindRange(IEnumerable<string> ExternalIds);
     }
 }

@@ -196,7 +196,12 @@ namespace Penguin.Persistence.Repositories
         /// <returns>An object with a matching ID or null</returns>
         public virtual T Find(int Id) => this.Context.Find(Id);
 
-        T ICrud<T>.Find(object Key) => this.Context.Find(Key);
+        /// <summary>
+        /// Finds the object by the key
+        /// </summary>
+        /// <param name="Key">The key to find</param>
+        /// <returns>Any matching object or null</returns>
+        public virtual T Find(object Key) => this.Find((int)Key);
 
         object ICrud.Find(object Key) => this.Find((int)Key);
 
@@ -209,7 +214,7 @@ namespace Penguin.Persistence.Repositories
         /// <returns>Objects that match the Id</returns>
         public virtual IEnumerable<T> FindRange(IEnumerable<int> Ids) => this.Context.FindRange(Ids);
 
-        IEnumerable<T> ICrud<T>.FindRange(IEnumerable Keys) => this.Context.FindRange(Keys);
+        IEnumerable<T> ICrud<T>.FindRange(IEnumerable Keys) => this.FindRange(Keys.Cast<int>());
 
         IEnumerable ICrud.FindRange(IEnumerable Key) => this.FindRange(Key.Cast<int>());
 

@@ -57,14 +57,14 @@
             <param name="ExternalId">The external Id of the entity to get</param>
             <returns>An entity with a matching external Id, or null</returns>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepository`1.Find(System.Guid[])">
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.Guid})">
             <summary>
             Gets an IEnumerable of entities where the Guid is found in the provided list
             </summary>
             <param name="guids">The list of Guids to search for</param>
             <returns>an IEnumerable of entities where the Guid is found in the provided list</returns>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepository`1.Find(System.String[])">
+        <member name="M:Penguin.Persistence.Repositories.Interfaces.IEntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Gets an IEnumerable of entities where the External Id is found in the provided list
             </summary>
@@ -159,7 +159,7 @@
             <param name="dbContext">Any persistence context for this entity</param>
             <param name="messageBus">An optional message bus to use for persistence messages</param>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Find(System.Guid[])">
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.Guid})">
             <summary>
             Gets an IEnumerable of objects based on the Guid
             </summary>
@@ -173,7 +173,7 @@
             <param name="ExternalId">The external ID of the object to retrieve</param>
             <returns>An object with the matching ExternalID or null</returns>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Find(System.String[])">
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Gets an IEnumerable of objects based on the External Ids
             </summary>
@@ -228,6 +228,13 @@
             </summary>
             <param name="ExternalIds">The External Ids to search for</param>
             <returns>A list of entities where their ID was found in the provided list</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.Find(System.Object)">
+            <summary>
+            Attempts to find the key type and passes it to the appropriate typed find method
+            </summary>
+            <param name="Key">The key to search for</param>
+            <returns>An object with a key of the specified type that matches</returns>
         </member>
         <member name="M:Penguin.Persistence.Repositories.EntityRepository`1.ShallowClone(`0)">
             <summary>
@@ -375,6 +382,13 @@
             </summary>
             <param name="Id">The Id to find</param>
             <returns>An object with a matching ID or null</returns>
+        </member>
+        <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.Find(System.Object)">
+            <summary>
+            Finds the object by the key
+            </summary>
+            <param name="Key">The key to find</param>
+            <returns>Any matching object or null</returns>
         </member>
         <member name="M:Penguin.Persistence.Repositories.KeyedObjectRepository`1.FindRange(System.Collections.Generic.IEnumerable{System.Int32})">
             <summary>
