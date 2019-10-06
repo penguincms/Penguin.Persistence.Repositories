@@ -96,7 +96,7 @@ namespace Penguin.Persistence.Repositories
         /// <param name="guid">The Guid to look for</param>
         /// <returns>An object instance, or null</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>")]
-        public virtual T Find(Guid guid) => this.Find(guid);
+        public virtual T Find(Guid guid) => this.FirstOrDefault(e => e.Guid == guid);
 
         /// <summary>
         /// Retrieves an object instance from the persistence context by its Guid
