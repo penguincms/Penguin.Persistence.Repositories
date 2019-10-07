@@ -1,5 +1,5 @@
-﻿using Penguin.Persistence.Abstractions.Interfaces;
-using Penguin.Persistence.Abstractions.Models.Base;
+﻿using Penguin.Persistence.Abstractions;
+using Penguin.Persistence.Abstractions.Interfaces;
 using System.Collections.Generic;
 
 namespace Penguin.Persistence.Repositories.Interfaces

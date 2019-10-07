@@ -1,8 +1,5 @@
-﻿using Penguin.Messaging.Abstractions.Interfaces;
-using Penguin.Messaging.Core;
-using Penguin.Messaging.Persistence.Messages;
+﻿using Penguin.Messaging.Core;
 using Penguin.Persistence.Abstractions.Interfaces;
-using Penguin.Persistence.Abstractions.Models.Base;
 using Penguin.Persistence.Repositories.Interfaces;
 using System;
 using System.Collections;
@@ -12,8 +9,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using Penguin.Reflection.Extensions;
 using System.Threading.Tasks;
+using Penguin.Persistence.Abstractions;
 
-namespace Penguin.Persistence.Repositories
+namespace Penguin.Persistence.Repositories.Repositories
 {
     /// <summary>
     /// Base repository for any objects inheriting from "Keyed Object"
