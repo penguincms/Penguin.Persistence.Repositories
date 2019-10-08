@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Penguin.Debugging;
+﻿using Penguin.Debugging;
+using Penguin.DependencyInjection.Abstractions.Enums;
 using Penguin.DependencyInjection.Abstractions.Interfaces;
 using Penguin.Persistence.Abstractions;
 using Penguin.Persistence.Abstractions.Interfaces;
@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Penguin.Persistence.Repositories.DependencyInjection
 {
@@ -20,7 +19,7 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
         /// <summary>
         /// Registers the dependencies
         /// </summary>
-        public void RegisterDependencies(Action<Type, Type, ServiceLifetime> registrationFunc)
+        public void RegisterDependencies(IServiceRegister serviceRegister)
         {
             List<Type> KeyedObjectTypes = TypeFactory.GetDerivedTypes(typeof(KeyedObject)).ToList();
 
@@ -50,10 +49,10 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
             {
                 StaticLogger.Log($"PPDI: Registering persistence context for {t}", StaticLogger.LoggingLevel.Call);
 
-                registrationFunc(typeof(IPersistenceContext<>).MakeGenericType(t), PersistenceContextType.MakeGenericType(t), ServiceLifetime.Transient);
+                serviceRegister.Register(typeof(IPersistenceContext<>).MakeGenericType(t), PersistenceContextType.MakeGenericType(t), ServiceLifetime.Transient);
             }
 
-            registrationFunc(typeof(IPersistenceContext), PersistenceContextType.MakeGenericType(typeof(KeyedObject)), ServiceLifetime.Transient);
+            serviceRegister.Register(typeof(IPersistenceContext), PersistenceContextType.MakeGenericType(typeof(KeyedObject)), ServiceLifetime.Transient);
 
             HashSet<Type> FoundRepositories = new HashSet<Type>();
 
@@ -63,7 +62,7 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
 
                 StaticLogger.Log($"PPDI: Registering repository for {ri.RepositoryType} => {ri.ObjectType}", StaticLogger.LoggingLevel.Call);
 
-                RecursiveRegisterRepository(registrationFunc, ri.RepositoryType);
+                RecursiveRegisterRepository(serviceRegister, ri.RepositoryType);
 
                 Type baseType = ri.RepositoryType.BaseType;
 
@@ -79,7 +78,7 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
                 {
                     if (repoType.GetGenericArguments()[0].GetGenericParameterConstraints()[0].IsAssignableFrom(keyedObjectType))
                     {
-                        RecursiveRegisterRepository(registrationFunc, repoType.MakeGenericType(keyedObjectType));
+                        RecursiveRegisterRepository(serviceRegister, repoType.MakeGenericType(keyedObjectType));
                         break;
                     }
                 }
@@ -88,11 +87,11 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
             StaticLogger.Log($"PPDI: Completed registrations", StaticLogger.LoggingLevel.Final);
         }
 
-        private static void RecursiveRegisterRepository(Action<Type, Type, ServiceLifetime> registrationFunc, Type RepositoryType)
+        private static void RecursiveRegisterRepository(IServiceRegister serviceRegister, Type RepositoryType)
         {
-            registrationFunc(RepositoryType, RepositoryType, ServiceLifetime.Transient);
+            serviceRegister.Register(RepositoryType, RepositoryType, ServiceLifetime.Transient);
 
-            RegisterInterfaces(registrationFunc, RepositoryType);
+            RegisterInterfaces(serviceRegister, RepositoryType);
 
             Type baseType = RepositoryType.BaseType;
 
@@ -102,14 +101,14 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
                 {
                     StaticLogger.Log($"PPDI: Registering repository for {baseType} => {RepositoryType}", StaticLogger.LoggingLevel.Call);
 
-                    registrationFunc(baseType, RepositoryType, ServiceLifetime.Transient);
+                    serviceRegister.Register(baseType, RepositoryType, ServiceLifetime.Transient);
                 }
 
                 baseType = baseType.BaseType;
             }
         }
 
-        private static void RegisterInterfaces(Action<Type, Type, ServiceLifetime> registrationFunc, Type RepositoryType)
+        private static void RegisterInterfaces(IServiceRegister serviceRegister, Type RepositoryType)
         {
             foreach (Type i in RepositoryType.GetInterfaces())
             {
@@ -117,7 +116,7 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
                 {
                     StaticLogger.Log($"PPDI: Registering repository for {i} => {RepositoryType}", StaticLogger.LoggingLevel.Call);
 
-                    registrationFunc(i, RepositoryType, ServiceLifetime.Transient);
+                    serviceRegister.Register(i, RepositoryType, ServiceLifetime.Transient);
                 }
             }
         }

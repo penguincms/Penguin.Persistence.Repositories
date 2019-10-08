@@ -9,7 +9,7 @@
             Contains the interface that automatically registers IRepository implementations for KeyedObject types, as well as IPersistenceContexts
             </summary>
         </member>
-        <member name="M:Penguin.Persistence.Repositories.DependencyInjection.DependencyRegistrations.RegisterDependencies(System.Action{System.Type,System.Type,Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+        <member name="M:Penguin.Persistence.Repositories.DependencyInjection.DependencyRegistrations.RegisterDependencies(Penguin.DependencyInjection.Abstractions.Interfaces.IServiceRegister)">
             <summary>
             Registers the dependencies
             </summary>
