@@ -1,0 +1,6 @@
+Penguin.DependencyInjection.Abstractions
+Penguin.Messaging.Core
+Penguin.Messaging.Persistence
+Penguin.Persistence.Abstractions
+Penguin.Reflection
+Penguin.Reflection.Extensions
