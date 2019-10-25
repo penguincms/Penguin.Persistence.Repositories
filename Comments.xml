@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Penguin.Persistence.Repositories</name>
+        <name>Penguin.Persistence.Repositories.Local</name>
     </assembly>
     <members>
         <member name="T:Penguin.Persistence.Repositories.DependencyInjection.DependencyRegistrations">
