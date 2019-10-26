@@ -7,11 +7,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.DependencyInjection.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Penguin.Messaging.Core" Version="3.1.1" />
     <PackageReference Include="Penguin.Messaging.Persistence" Version="2.2.4" />
     <PackageReference Include="Penguin.Persistence.Abstractions" Version="3.0.0" />
     <PackageReference Include="Penguin.Reflection" Version="4.0.8" />
     <PackageReference Include="Penguin.Reflection.Extensions" Version="3.0.4" />
+    <PackageReference Include="Penguin.DependencyInjection.Abstractions" Version="2.1.5-63707652289" />
+    <PackageReference Include="Penguin.Messaging.Core" Version="3.1.1-63707653241" />
   </ItemGroup>
 </Project>
