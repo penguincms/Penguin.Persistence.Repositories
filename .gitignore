@@ -2,3 +2,5 @@
 /.vs
 /bin
 /NugetInstall
+.meta
+.metaOne
