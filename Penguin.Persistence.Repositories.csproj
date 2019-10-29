@@ -7,10 +7,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Persistence.Abstractions" Version="3.0.1-T9LXGUJ" />
-    <PackageReference Include="Penguin.Reflection" Version="4.0.8-T9LXGUJ" />
-    <PackageReference Include="Penguin.DependencyInjection.Abstractions" Version="2.1.5-T9LXGUJ" />
-    <PackageReference Include="Penguin.Messaging.Core" Version="3.1.1-T9LXGUJ" />
-    <PackageReference Include="Penguin.Messaging.Persistence" Version="2.2.4-T9LXGUJ" />
+    <PackageReference Include="Penguin.Persistence.Abstractions" Version="3.0.2-T9M1HHH" />
+    <PackageReference Include="Penguin.Reflection" Version="4.0.9-T9M1HHH" />
+    <PackageReference Include="Penguin.DependencyInjection.Abstractions" Version="2.1.6-T9M1HHH" />
+    <PackageReference Include="Penguin.Messaging.Core" Version="3.1.2-T9M1HHH" />
+    <PackageReference Include="Penguin.Messaging.Persistence" Version="2.2.5-T9M1HHH" />
   </ItemGroup>
 </Project>
