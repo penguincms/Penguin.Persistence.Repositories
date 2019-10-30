@@ -5,19 +5,21 @@
     <Version>3.0.2</Version>
     <Description>Abstract objects and interfaces for use with Penguin.Persistence.Abstractions created to convert EntityFramework contexts to a repository pattern allowing for applications to decouple from EF and allow for other data providers.</Description>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Penguin.Persistence.Repositories</AssemblyName>
+    <RootNamespace>Penguin.Persistence.Repositories</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Penguin.DependencyInjection.Abstractions\Penguin.DependencyInjection.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Messaging.Core\Penguin.Messaging.Core.Local.csproj" />
     <ProjectReference Include="..\Penguin.Debugging\Penguin.Debugging.Local.csproj" />
+    <ProjectReference Include="..\Penguin.DependencyInjection.Abstractions\Penguin.DependencyInjection.Abstractions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Entities.Abstractions\Penguin.Entities.Abstractions.Local.csproj" />
     <ProjectReference Include="..\Penguin.Extensions.Exceptions\Penguin.Extensions.Exceptions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Extensions.String\Penguin.Extensions.String.Local.csproj" />
     <ProjectReference Include="..\Penguin.Messaging.Abstractions\Penguin.Messaging.Abstractions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Messaging.Core\Penguin.Messaging.Core.Local.csproj" />
     <ProjectReference Include="..\Penguin.Messaging.Persistence\Penguin.Messaging.Persistence.Local.csproj" />
     <ProjectReference Include="..\Penguin.Persistence.Abstractions\Penguin.Persistence.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Entities.Abstractions\Penguin.Entities.Abstractions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Reflection.Extensions\Penguin.Reflection.Extensions.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Extensions.String\Penguin.Extensions.String.Local.csproj" />
-    <ProjectReference Include="..\Penguin.Reflection.Abstractions\Penguin.Reflection.Abstractions.Local.csproj" />
     <ProjectReference Include="..\Penguin.Reflection\Penguin.Reflection.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Reflection.Abstractions\Penguin.Reflection.Abstractions.Local.csproj" />
+    <ProjectReference Include="..\Penguin.Reflection.Extensions\Penguin.Reflection.Extensions.Local.csproj" />
   </ItemGroup>
 </Project>
