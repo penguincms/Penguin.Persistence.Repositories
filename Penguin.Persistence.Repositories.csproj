@@ -7,6 +7,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Penguin.Persistence.Repositories</AssemblyName>
     <RootNamespace>Penguin.Persistence.Repositories</RootNamespace>
+    <DocumentationFile>Penguin.Persistence.Repositories.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Penguin.Persistence.Abstractions" Version="3.0.2-T9QC72V" />
