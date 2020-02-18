@@ -1,15 +1,15 @@
 ﻿using Penguin.Messaging.Core;
+using Penguin.Persistence.Abstractions;
 using Penguin.Persistence.Abstractions.Interfaces;
 using Penguin.Persistence.Repositories.Interfaces;
+using Penguin.Reflection.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
-using Penguin.Reflection.Extensions;
 using System.Threading.Tasks;
-using Penguin.Persistence.Abstractions;
 
 namespace Penguin.Persistence.Repositories.Repositories
 {

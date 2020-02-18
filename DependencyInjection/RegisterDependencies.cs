@@ -30,7 +30,6 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
             if (PersistenceContextTypes.Count == 0)
             {
                 throw new Exception("Unable to find valid injectable type inheriting from " + typeof(IPersistenceContext<>));
-
             }
             else if (PersistenceContextTypes.Count > 1)
             {
@@ -65,7 +64,6 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
                 RecursiveRegisterRepository(serviceRegister, ri.RepositoryType);
 
                 Type baseType = ri.RepositoryType.BaseType;
-
             }
 
             List<Type> RepositoryImplementations = TypeFactory.GetAllImplementations(typeof(IRepository)).Where(t => t.IsGenericType).OrderByDescending(t => GetHierarchy(t).Count()).ToList();
@@ -85,6 +83,15 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
             }
 
             StaticLogger.Log($"PPDI: Completed registrations", StaticLogger.LoggingLevel.Final);
+        }
+
+        private static IEnumerable<Type> GetHierarchy(Type type)
+        {
+            while (type != null)
+            {
+                yield return type;
+                type = type.BaseType;
+            }
         }
 
         private static void RecursiveRegisterRepository(IServiceRegister serviceRegister, Type RepositoryType)
@@ -118,15 +125,6 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
 
                     serviceRegister.Register(i, RepositoryType, ServiceLifetime.Transient);
                 }
-            }
-        }
-
-        private static IEnumerable<Type> GetHierarchy(Type type)
-        {
-            while (type != null)
-            {
-                yield return type;
-                type = type.BaseType;
             }
         }
     }
