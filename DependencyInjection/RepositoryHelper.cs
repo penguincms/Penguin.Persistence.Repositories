@@ -19,7 +19,6 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
         {
             foreach (Type t in TypeFactory.GetAllTypes())
             {
-                string TypeName = t.Name;
                 if (IsValidRepositoryType(t))
                 {
                     yield return new RepositoryTypeInfo(t, t.BaseType.GenericTypeArguments.First());
