@@ -10,10 +10,10 @@
     <DocumentationFile>Penguin.Persistence.Repositories.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.Messaging.Core" Version="3.1.2-T9XWH6X" />
-    <PackageReference Include="Penguin.Reflection" Version="4.0.9-T9XWH6X" />
-    <PackageReference Include="Penguin.DependencyInjection.Abstractions" Version="2.1.6-T9XWH6X" />
-    <PackageReference Include="Penguin.Messaging.Persistence" Version="2.2.5-T9XWH6X" />
-    <PackageReference Include="Penguin.Persistence.Abstractions" Version="3.0.2-T9XWH6X" />
+    <PackageReference Include="Penguin.Messaging.Core" Version="3.1.2-T9XYC7H" />
+    <PackageReference Include="Penguin.Reflection" Version="4.0.9-T9XYC7H" />
+    <PackageReference Include="Penguin.DependencyInjection.Abstractions" Version="2.1.6-T9XYC7H" />
+    <PackageReference Include="Penguin.Messaging.Persistence" Version="2.2.5-T9XYC7H" />
+    <PackageReference Include="Penguin.Persistence.Abstractions" Version="3.0.2-T9XYC7H" />
   </ItemGroup>
 </Project>
