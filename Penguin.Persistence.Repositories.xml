@@ -67,12 +67,12 @@
         </member>
         <member name="P:Penguin.Persistence.Repositories.Repositories.KeyedObjectRepository`1.All">
             <summary>
-            Returns the (possibly) overridden IQueriable used to access database by the underlying persistence context
+            Returns the (possibly) overridden IQueryable used to access database by the underlying persistence context
             </summary>
         </member>
         <member name="P:Penguin.Persistence.Repositories.Repositories.KeyedObjectRepository`1.Context">
             <summary>
-            The underlying perisstence context that handles saving of the data this repository is accessing
+            The underlying persistence context that handles saving of the data this repository is accessing
             </summary>
         </member>
         <member name="P:Penguin.Persistence.Repositories.Repositories.KeyedObjectRepository`1.ElementType">
@@ -215,9 +215,9 @@
         </member>
         <member name="M:Penguin.Persistence.Repositories.Repositories.KeyedObjectRepository`1.GetEnumerator">
             <summary>
-            This returns the Enumerator for the underlying IQueriable
+            This returns the Enumerator for the underlying IQueryable
             </summary>
-            <returns>The Enumerator for the underlying IQueriable</returns>
+            <returns>The Enumerator for the underlying IQueryable</returns>
         </member>
         <member name="M:Penguin.Persistence.Repositories.Repositories.KeyedObjectRepository`1.OfType``1">
             <summary>
@@ -257,8 +257,8 @@
             Allows for a "Where" call on a non generic instance by converting the provided expression tree to the implemented type
             </summary>
             <typeparam name="T1">An assumed type/base for this non-generic instance of the repository</typeparam>
-            <param name="predicate">The Expression to pass to the underlying IQueriable</param>
-            <returns>The results of evaluating the expression against the underlying IQueriable</returns>
+            <param name="predicate">The Expression to pass to the underlying IQueryable</param>
+            <returns>The results of evaluating the expression against the underlying IQueryable</returns>
         </member>
         <member name="M:Penguin.Persistence.Repositories.Repositories.KeyedObjectRepository`1.WriteContext">
             <summary>

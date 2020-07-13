@@ -24,14 +24,14 @@ namespace Penguin.Persistence.Repositories.Repositories
         //private readonly Type x = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
 
         /// <summary>
-        /// Returns the (possibly) overridden IQueriable used to access database by the underlying persistence context
+        /// Returns the (possibly) overridden IQueryable used to access database by the underlying persistence context
         /// </summary>
         public virtual IQueryable<T> All => this.Context.All;
 
         IQueryable ICrud.All => this.All;
 
         /// <summary>
-        /// The underlying perisstence context that handles saving of the data this repository is accessing
+        /// The underlying persistence context that handles saving of the data this repository is accessing
         /// </summary>
         public IPersistenceContext<T> Context { get; internal set; }
 
@@ -297,9 +297,9 @@ namespace Penguin.Persistence.Repositories.Repositories
         }
 
         /// <summary>
-        /// This returns the Enumerator for the underlying IQueriable
+        /// This returns the Enumerator for the underlying IQueryable
         /// </summary>
-        /// <returns>The Enumerator for the underlying IQueriable</returns>
+        /// <returns>The Enumerator for the underlying IQueryable</returns>
         public IEnumerator<T> GetEnumerator()
         {
             return this.Context.GetEnumerator();
@@ -381,8 +381,8 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// Allows for a "Where" call on a non generic instance by converting the provided expression tree to the implemented type
         /// </summary>
         /// <typeparam name="T1">An assumed type/base for this non-generic instance of the repository</typeparam>
-        /// <param name="predicate">The Expression to pass to the underlying IQueriable</param>
-        /// <returns>The results of evaluating the expression against the underlying IQueriable</returns>
+        /// <param name="predicate">The Expression to pass to the underlying IQueryable</param>
+        /// <returns>The results of evaluating the expression against the underlying IQueryable</returns>
         public IEnumerable<T1> Where<T1>(Expression<Func<T1, bool>> predicate) where T1 : class
         {
             Contract.Requires(predicate != null);
