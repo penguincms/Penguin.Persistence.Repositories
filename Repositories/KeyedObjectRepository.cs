@@ -385,7 +385,10 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <returns>The results of evaluating the expression against the underlying IQueryable</returns>
         public IEnumerable<T1> Where<T1>(Expression<Func<T1, bool>> predicate) where T1 : class
         {
-            Contract.Requires(predicate != null);
+            if (predicate is null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
 
             Expression<Func<T, bool>> derivedExpr = Expression.Lambda<Func<T, bool>>(predicate.Body, predicate.Parameters);
 

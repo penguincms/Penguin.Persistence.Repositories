@@ -21,6 +21,11 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
         /// </summary>
         public void RegisterDependencies(IServiceRegister serviceRegister)
         {
+            if (serviceRegister is null)
+            {
+                throw new ArgumentNullException(nameof(serviceRegister));
+            }
+
             List<Type> KeyedObjectTypes = TypeFactory.GetDerivedTypes(typeof(KeyedObject)).ToList();
 
             StaticLogger.Log($"Penguin.Persistence.Database.DependencyInjection: {Assembly.GetExecutingAssembly().GetName().Version}", StaticLogger.LoggingLevel.Call);
