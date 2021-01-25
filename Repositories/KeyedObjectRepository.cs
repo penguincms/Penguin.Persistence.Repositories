@@ -6,7 +6,6 @@ using Penguin.Reflection.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -17,7 +16,6 @@ namespace Penguin.Persistence.Repositories.Repositories
     /// Base repository for any objects inheriting from "Keyed Object"
     /// </summary>
     /// <typeparam name="T">Any object type inheriting from "KeyedObject" </typeparam>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "<Pending>")]
     public class KeyedObjectRepository<T> : IKeyedObjectRepository<T> where T : KeyedObject
     {
         ////This is needed to ensure that the assembly is marked as referenced in the manifest
@@ -49,7 +47,7 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// Returns a bool indicating whether or not the underlying persistence context contains a set for storing the
         /// type represented by this repository
         /// </summary>
-        public bool IsValid => (this.Context as IPersistenceContext).IsValid;
+        public bool IsValid => this.Context.IsValid;
 
         /// <summary>
         /// Returns the Provider of the underlying PersistenceContext
