@@ -2,7 +2,7 @@
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
   <PropertyGroup>
     <PackageProjectUrl>https://github.com/penguincms/Penguin.Persistence.Repositories</PackageProjectUrl>
-    <Version>5.0.0</Version>
+    <Version>5.0.1</Version>
     <Description>Abstract objects and interfaces for use with Penguin.Persistence.Abstractions created to convert EntityFramework contexts to a repository pattern allowing for applications to decouple from EF and allow for other data providers.</Description>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Penguin.Persistence.Repositories</AssemblyName>
@@ -10,10 +10,10 @@
     <DocumentationFile>Penguin.Persistence.Repositories.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Penguin.DependencyInjection.Abstractions" Version="5.0.1-TA99DVY" />
-    <PackageReference Include="Penguin.Messaging.Persistence" Version="5.0.1-TA99DVY" />
-    <PackageReference Include="Penguin.Persistence.Abstractions" Version="5.0.1-TA99DVY" />
-    <PackageReference Include="Penguin.Messaging.Core" Version="5.0.1-TA99DVY" />
-    <PackageReference Include="Penguin.Reflection" Version="5.0.1-TA99DVY" />
+    <PackageReference Include="Penguin.DependencyInjection.Abstractions" Version="5.0.2-TA9KKLU" />
+    <PackageReference Include="Penguin.Messaging.Persistence" Version="5.0.2-TA9KKLU" />
+    <PackageReference Include="Penguin.Persistence.Abstractions" Version="5.0.2-TA9KKLU" />
+    <PackageReference Include="Penguin.Messaging.Core" Version="5.0.2-TA9KKLU" />
+    <PackageReference Include="Penguin.Reflection" Version="5.0.2-TA9KKLU" />
   </ItemGroup>
 </Project>
