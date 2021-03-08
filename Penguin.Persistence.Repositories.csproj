@@ -14,6 +14,6 @@
     <PackageReference Include="Penguin.Messaging.Persistence" Version="5.0.2-TA9KKLU" />
     <PackageReference Include="Penguin.Messaging.Core" Version="5.0.2-TA9KKLU" />
     <PackageReference Include="Penguin.Reflection" Version="5.0.2-TA9KKLU" />
-    <PackageReference Include="Penguin.Persistence.Abstractions" Version="5.0.2-TAA4YFP" />
+    <PackageReference Include="Penguin.Persistence.Abstractions" Version="5.0.2-TABDXT3" />
   </ItemGroup>
 </Project>
