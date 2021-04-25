@@ -2,7 +2,7 @@
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
   <PropertyGroup>
     <PackageProjectUrl>https://github.com/penguincms/Penguin.Persistence.Repositories</PackageProjectUrl>
-    <Version>5.0.1</Version>
+    <Version>5.0.5</Version>
     <Description>Abstract objects and interfaces for use with Penguin.Persistence.Abstractions created to convert EntityFramework contexts to a repository pattern allowing for applications to decouple from EF and allow for other data providers.</Description>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Penguin.Persistence.Repositories</AssemblyName>
