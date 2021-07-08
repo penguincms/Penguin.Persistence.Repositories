@@ -75,7 +75,8 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
 
             foreach (Type keyedObjectType in KeyedObjectTypes)
             {
-                if (FoundRepositories.Contains(keyedObjectType)) { continue; }
+                if (FoundRepositories.Contains(keyedObjectType))
+                { continue; }
 
                 foreach (Type repoType in RepositoryImplementations)
                 {
