@@ -4,7 +4,7 @@
     <PackageProjectUrl>https://github.com/PenguinCMS/Penguin.Persistence.Repositories</PackageProjectUrl>
     <Version>5.0.5</Version>
     <Description>Abstract objects and interfaces for use with Penguin.Persistence.Abstractions created to convert EntityFramework contexts to a repository pattern allowing for applications to decouple from EF and allow for other data providers.</Description>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
     <AssemblyName>Penguin.Persistence.Repositories</AssemblyName>
     <RootNamespace>Penguin.Persistence.Repositories</RootNamespace>
     <DocumentationFile>Penguin.Persistence.Repositories.xml</DocumentationFile>
