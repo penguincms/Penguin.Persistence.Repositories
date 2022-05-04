@@ -79,9 +79,15 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// Adds a new object to the context
         /// </summary>
         /// <param name="o">The object to add</param>
-        public virtual void Add(T o) => this.Context.Add(o);
+        public virtual void Add(T o)
+        {
+            this.Context.Add(o);
+        }
 
-        void ICrud.Add(object o) => this.Add((T)o);
+        void ICrud.Add(object o)
+        {
+            this.Add((T)o);
+        }
 
         /// <summary>
         /// ShallowClones an object, resets the key, and then calls Add
@@ -100,15 +106,24 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// ShallowClones an object, resets the key, and then calls Add
         /// </summary>
         /// <param name="o">The object to clone</param>
-        void IRepository.AddCopy(object o) => this.AddCopy((T)o);
+        void IRepository.AddCopy(object o)
+        {
+            this.AddCopy((T)o);
+        }
 
         /// <summary>
         /// Updates an object or adds it if it does not exist
         /// </summary>
         /// <param name="o">The object to add or update</param>
-        public virtual void AddOrUpdate(T o) => this.Context.AddOrUpdate(o);
+        public virtual void AddOrUpdate(T o)
+        {
+            this.Context.AddOrUpdate(o);
+        }
 
-        void ICrud.AddOrUpdate(object o) => this.AddOrUpdate((T)o);
+        void ICrud.AddOrUpdate(object o)
+        {
+            this.AddOrUpdate((T)o);
+        }
 
         /// <summary>
         /// ShallowClones an object, resets the key, and then calls AddOrUpdate
@@ -127,109 +142,181 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// ShallowClones an object, resets the key, and then calls AddOrUpdate
         /// </summary>
         /// <param name="o">The object to clone</param>
-        void IRepository.AddOrUpdateCopy(object o) => this.AddOrUpdateCopy((T)o);
+        void IRepository.AddOrUpdateCopy(object o)
+        {
+            this.AddOrUpdateCopy((T)o);
+        }
 
         /// <summary>
         /// Adds a range of new objects or updates existing objects if they already exist
         /// </summary>
         /// <param name="o">The objects to add or update</param>
-        public virtual void AddOrUpdateRange(IEnumerable<T> o) => this.Context.AddOrUpdateRange(o);
+        public virtual void AddOrUpdateRange(IEnumerable<T> o)
+        {
+            this.Context.AddOrUpdateRange(o);
+        }
 
-        void ICrud.AddOrUpdateRange(IEnumerable o) => this.AddOrUpdateRange(o.Cast<T>());
+        void ICrud.AddOrUpdateRange(IEnumerable o)
+        {
+            this.AddOrUpdateRange(o.Cast<T>());
+        }
 
         /// <summary>
         /// Adds a range of new objects
         /// </summary>
         /// <param name="o">The objects to add</param>
-        public virtual void AddRange(IEnumerable<T> o) => this.Context.AddRange(o);
+        public virtual void AddRange(IEnumerable<T> o)
+        {
+            this.Context.AddRange(o);
+        }
 
-        void ICrud.AddRange(IEnumerable o) => this.AddRange(o.Cast<T>());
+        void ICrud.AddRange(IEnumerable o)
+        {
+            this.AddRange(o.Cast<T>());
+        }
 
         /// <summary>
         /// Cancels any open write contexts and prevents changes from persisting
         /// </summary>
-        public void CancelWrite() => this.Context.CancelWrite();
+        public void CancelWrite()
+        {
+            this.Context.CancelWrite();
+        }
 
         /// <summary>
         /// If all WriteContexts have been deregistered, this should persist any changes to the underlying data store
         /// </summary>
         /// <param name="writeContext">The IWriteContext that has finished making changes</param>
-        public void Commit(IWriteContext writeContext) => this.Context.Commit(writeContext);
+        public void Commit(IWriteContext writeContext)
+        {
+            this.Context.Commit(writeContext);
+        }
 
         /// <summary>
         /// If all WriteContexts have been deregistered, this should persist any changes to the underlying data store in an ASYNC manner
         /// </summary>
         /// <param name="writeContext">The IWriteContext that has finished making changes</param>
-        public Task CommitASync(IWriteContext writeContext) => this.Context.CommitASync(writeContext);
+        public Task CommitASync(IWriteContext writeContext)
+        {
+            return this.Context.CommitASync(writeContext);
+        }
 
         /// <summary>
         /// Deletes an object from the persistence context
         /// </summary>
         /// <param name="o">The object to delete</param>
-        public virtual void Delete(T o) => this.Context.Delete(o);
+        public virtual void Delete(T o)
+        {
+            this.Context.Delete(o);
+        }
 
-        void ICrud.Delete(object o) => this.Delete((T)o);
+        void ICrud.Delete(object o)
+        {
+            this.Delete((T)o);
+        }
 
         /// <summary>
         /// Deletes multiple objects from the persistence context
         /// </summary>
         /// <param name="o">The objects to delete</param>
-        public virtual void DeleteRange(IEnumerable<T> o) => this.Context.DeleteRange(o);
+        public virtual void DeleteRange(IEnumerable<T> o)
+        {
+            this.Context.DeleteRange(o);
+        }
 
-        void ICrud.DeleteRange(IEnumerable o) => this.DeleteRange(o.Cast<T>());
+        void ICrud.DeleteRange(IEnumerable o)
+        {
+            this.DeleteRange(o.Cast<T>());
+        }
 
         /// <summary>
         /// Gets an IEnumerable of objects from the Persistence Context that match the provided list. Useful for refreshing from the context
         /// </summary>
         /// <param name="o">The matching objects to return</param>
         /// <returns>The matching objects</returns>
-        public virtual IEnumerable<T> Find(IEnumerable<T> o) => this.Context.FindRange(o);
+        public virtual IEnumerable<T> Find(IEnumerable<T> o)
+        {
+            return this.Context.FindRange(o);
+        }
 
         /// <summary>
         /// Finds a KeyedObject by its int Id
         /// </summary>
         /// <param name="Id">The Id to find</param>
         /// <returns>An object with a matching ID or null</returns>
-        public virtual T Find(int Id) => this.Context.Find(Id);
+        public virtual T Find(int Id)
+        {
+            return this.Context.Find(Id);
+        }
 
         /// <summary>
         /// Finds the object by the key
         /// </summary>
         /// <param name="Key">The key to find</param>
         /// <returns>Any matching object or null</returns>
-        public virtual T Find(object Key) => this.Find((int)Key);
+        public virtual T Find(object Key)
+        {
+            return this.Find((int)Key);
+        }
 
-        object ICrud.Find(object Key) => this.Find((int)Key);
+        object ICrud.Find(object Key)
+        {
+            return this.Find((int)Key);
+        }
 
-        KeyedObject IKeyedObjectRepository.Find(int Id) => this.Find(Id);
+        KeyedObject IKeyedObjectRepository.Find(int Id)
+        {
+            return this.Find(Id);
+        }
 
         /// <summary>
         /// Finds a number of objects with matching Ids
         /// </summary>
         /// <param name="Ids">The Ids to find</param>
         /// <returns>Objects that match the Id</returns>
-        public virtual IEnumerable<T> FindRange(IEnumerable<int> Ids) => this.Context.FindRange(Ids);
+        public virtual IEnumerable<T> FindRange(IEnumerable<int> Ids)
+        {
+            return this.Context.FindRange(Ids);
+        }
 
-        IEnumerable<T> ICrud<T>.FindRange(IEnumerable Keys) => this.FindRange(Keys.Cast<int>());
+        IEnumerable<T> ICrud<T>.FindRange(IEnumerable Keys)
+        {
+            return this.FindRange(Keys.Cast<int>());
+        }
 
-        IEnumerable ICrud.FindRange(IEnumerable Key) => this.FindRange(Key.Cast<int>());
+        IEnumerable ICrud.FindRange(IEnumerable Key)
+        {
+            return this.FindRange(Key.Cast<int>());
+        }
 
-        IEnumerable<KeyedObject> IKeyedObjectRepository.FindRange(IEnumerable<int> Ids) => this.FindRange(Ids);
+        IEnumerable<KeyedObject> IKeyedObjectRepository.FindRange(IEnumerable<int> Ids)
+        {
+            return this.FindRange(Ids);
+        }
 
         /// <summary>
         /// This returns the Enumerator for the underlying IQueryable
         /// </summary>
         /// <returns>The Enumerator for the underlying IQueryable</returns>
-        public IEnumerator<T> GetEnumerator() => this.Context.GetEnumerator();
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this.Context.GetEnumerator();
+        }
 
-        IEnumerator IEnumerable.GetEnumerator() => this.Context.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.Context.GetEnumerator();
+        }
 
         /// <summary>
         /// Returns objects from the repository of the specified type, for repositories where more than one type exist
         /// </summary>
         /// <typeparam name="TDerived">The type to return</typeparam>
         /// <returns></returns>
-        public IQueryable<TDerived> OfType<TDerived>() where TDerived : T => this.Context.OfType<TDerived>();
+        public IQueryable<TDerived> OfType<TDerived>() where TDerived : T
+        {
+            return this.Context.OfType<TDerived>();
+        }
 
         /// <summary>
         /// ShallowClones an object and resets its key
@@ -250,25 +337,43 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// </summary>
         /// <param name="o">The object to shallow clone</param>
         /// <returns></returns>
-        public virtual object ShallowClone(object o) => this.ShallowClone((T)o);
+        public virtual object ShallowClone(object o)
+        {
+            return this.ShallowClone((T)o);
+        }
 
-        object IRepository.ShallowClone(object o) => this.ShallowClone((T)o);
+        object IRepository.ShallowClone(object o)
+        {
+            return this.ShallowClone((T)o);
+        }
 
         /// <summary>
         /// Updates an object but does not add it to the context if it does not exist
         /// </summary>
         /// <param name="o">The object to update</param>
-        public virtual void Update(T o) => this.Context.Update(o);
+        public virtual void Update(T o)
+        {
+            this.Context.Update(o);
+        }
 
-        void ICrud.Update(object o) => this.Update((T)o);
+        void ICrud.Update(object o)
+        {
+            this.Update((T)o);
+        }
 
         /// <summary>
         /// Updates a range of objects but does not add them to the context if they do not exist
         /// </summary>
         /// <param name="o">The objects to update</param>
-        public virtual void UpdateRange(IEnumerable<T> o) => this.Context.UpdateRange(o);
+        public virtual void UpdateRange(IEnumerable<T> o)
+        {
+            this.Context.UpdateRange(o);
+        }
 
-        void ICrud.UpdateRange(IEnumerable o) => this.UpdateRange(o.Cast<T>());
+        void ICrud.UpdateRange(IEnumerable o)
+        {
+            this.UpdateRange(o.Cast<T>());
+        }
 
         /// <summary>
         /// Allows for a "Where" call on a non generic instance by converting the provided expression tree to the implemented type
@@ -292,6 +397,9 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// Returns a new write context for the underlying persistence context
         /// </summary>
         /// <returns> a new write context for the underlying persistence context</returns>
-        public IWriteContext WriteContext() => this.Context.WriteContext();
+        public IWriteContext WriteContext()
+        {
+            return this.Context.WriteContext();
+        }
     }
 }

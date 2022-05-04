@@ -62,7 +62,7 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
 
             foreach (RepositoryTypeInfo ri in RepositoryHelper.GetRepositoriesAndBaseTypes())
             {
-                FoundRepositories.Add(ri.ObjectType);
+                _ = FoundRepositories.Add(ri.ObjectType);
 
                 StaticLogger.Log($"PPDI: Registering repository for {ri.RepositoryType} => {ri.ObjectType}", StaticLogger.LoggingLevel.Call);
 
