@@ -10,8 +10,8 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
 
         public RepositoryTypeInfo(Type repositoryType, Type objectType)
         {
-            this.RepositoryType = repositoryType;
-            this.ObjectType = objectType;
+            RepositoryType = repositoryType;
+            ObjectType = objectType;
         }
     }
 }

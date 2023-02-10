@@ -48,17 +48,7 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
                 return false;
             }
 
-            if (t.GetInterface(nameof(IRepository)) == null)
-            {
-                return false;
-            }
-
-            if (t.BaseType.GenericTypeArguments.Length != 1)
-            {
-                return false;
-            }
-
-            return true;
+            return t.GetInterface(nameof(IRepository)) != null && t.BaseType.GenericTypeArguments.Length == 1;
         }
     }
 }

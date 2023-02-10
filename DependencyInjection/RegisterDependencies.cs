@@ -58,7 +58,7 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
 
             serviceRegister.Register(typeof(IPersistenceContext), PersistenceContextType.MakeGenericType(typeof(KeyedObject)), ServiceLifetime.Transient);
 
-            HashSet<Type> FoundRepositories = new HashSet<Type>();
+            HashSet<Type> FoundRepositories = new();
 
             foreach (RepositoryTypeInfo ri in RepositoryHelper.GetRepositoriesAndBaseTypes())
             {

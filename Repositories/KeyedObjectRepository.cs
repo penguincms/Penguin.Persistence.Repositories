@@ -24,9 +24,9 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <summary>
         /// Returns the (possibly) overridden IQueryable used to access database by the underlying persistence context
         /// </summary>
-        public virtual IQueryable<T> All => this.Context.All;
+        public virtual IQueryable<T> All => Context.All;
 
-        IQueryable ICrud.All => this.All;
+        IQueryable ICrud.All => All;
 
         /// <summary>
         /// The underlying persistence context that handles saving of the data this repository is accessing
@@ -36,23 +36,23 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <summary>
         /// Returns the element type of the underlying persistence context
         /// </summary>
-        public Type ElementType => this.All.ElementType;
+        public Type ElementType => All.ElementType;
 
         /// <summary>
         /// Returns the current expressions of the underlying persistence context
         /// </summary>
-        public Expression Expression => this.All.Expression;
+        public Expression Expression => All.Expression;
 
         /// <summary>
         /// Returns a bool indicating whether or not the underlying persistence context contains a set for storing the
         /// type represented by this repository
         /// </summary>
-        public bool IsValid => this.Context.IsValid;
+        public bool IsValid => Context.IsValid;
 
         /// <summary>
         /// Returns the Provider of the underlying PersistenceContext
         /// </summary>
-        public IQueryProvider Provider => this.All.Provider;
+        public IQueryProvider Provider => All.Provider;
 
         /// <summary>
         /// An optional message bus for sending out persistence event messages
@@ -68,11 +68,11 @@ namespace Penguin.Persistence.Repositories.Repositories
         {
             if (context is null)
             {
-                throw new ArgumentNullException($"Can not create instance of {this.GetType()} with null context of type {typeof(IPersistenceContext<T>)}");
+                throw new ArgumentNullException($"Can not create instance of {GetType()} with null context of type {typeof(IPersistenceContext<T>)}");
             }
 
-            this.MessageBus = messageBus;
-            this.Context = context;
+            MessageBus = messageBus;
+            Context = context;
         }
 
         /// <summary>
@@ -81,12 +81,12 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="o">The object to add</param>
         public virtual void Add(T o)
         {
-            this.Context.Add(o);
+            Context.Add(o);
         }
 
         void ICrud.Add(object o)
         {
-            this.Add((T)o);
+            Add((T)o);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Penguin.Persistence.Repositories.Repositories
 
             newObject._Id = 0;
 
-            this.Add(newObject);
+            Add(newObject);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="o">The object to clone</param>
         void IRepository.AddCopy(object o)
         {
-            this.AddCopy((T)o);
+            AddCopy((T)o);
         }
 
         /// <summary>
@@ -117,12 +117,12 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="o">The object to add or update</param>
         public virtual void AddOrUpdate(T o)
         {
-            this.Context.AddOrUpdate(o);
+            Context.AddOrUpdate(o);
         }
 
         void ICrud.AddOrUpdate(object o)
         {
-            this.AddOrUpdate((T)o);
+            AddOrUpdate((T)o);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Penguin.Persistence.Repositories.Repositories
 
             newObject._Id = 0;
 
-            this.AddOrUpdate(newObject);
+            AddOrUpdate(newObject);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="o">The object to clone</param>
         void IRepository.AddOrUpdateCopy(object o)
         {
-            this.AddOrUpdateCopy((T)o);
+            AddOrUpdateCopy((T)o);
         }
 
         /// <summary>
@@ -153,12 +153,12 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="o">The objects to add or update</param>
         public virtual void AddOrUpdateRange(IEnumerable<T> o)
         {
-            this.Context.AddOrUpdateRange(o);
+            Context.AddOrUpdateRange(o);
         }
 
         void ICrud.AddOrUpdateRange(IEnumerable o)
         {
-            this.AddOrUpdateRange(o.Cast<T>());
+            AddOrUpdateRange(o.Cast<T>());
         }
 
         /// <summary>
@@ -167,12 +167,12 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="o">The objects to add</param>
         public virtual void AddRange(IEnumerable<T> o)
         {
-            this.Context.AddRange(o);
+            Context.AddRange(o);
         }
 
         void ICrud.AddRange(IEnumerable o)
         {
-            this.AddRange(o.Cast<T>());
+            AddRange(o.Cast<T>());
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// </summary>
         public void CancelWrite()
         {
-            this.Context.CancelWrite();
+            Context.CancelWrite();
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="writeContext">The IWriteContext that has finished making changes</param>
         public void Commit(IWriteContext writeContext)
         {
-            this.Context.Commit(writeContext);
+            Context.Commit(writeContext);
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="writeContext">The IWriteContext that has finished making changes</param>
         public Task CommitASync(IWriteContext writeContext)
         {
-            return this.Context.CommitASync(writeContext);
+            return Context.CommitASync(writeContext);
         }
 
         /// <summary>
@@ -207,12 +207,12 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="o">The object to delete</param>
         public virtual void Delete(T o)
         {
-            this.Context.Delete(o);
+            Context.Delete(o);
         }
 
         void ICrud.Delete(object o)
         {
-            this.Delete((T)o);
+            Delete((T)o);
         }
 
         /// <summary>
@@ -221,12 +221,12 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="o">The objects to delete</param>
         public virtual void DeleteRange(IEnumerable<T> o)
         {
-            this.Context.DeleteRange(o);
+            Context.DeleteRange(o);
         }
 
         void ICrud.DeleteRange(IEnumerable o)
         {
-            this.DeleteRange(o.Cast<T>());
+            DeleteRange(o.Cast<T>());
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <returns>The matching objects</returns>
         public virtual IEnumerable<T> Find(IEnumerable<T> o)
         {
-            return this.Context.FindRange(o);
+            return Context.FindRange(o);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <returns>An object with a matching ID or null</returns>
         public virtual T Find(int Id)
         {
-            return this.Context.Find(Id);
+            return Context.Find(Id);
         }
 
         /// <summary>
@@ -256,17 +256,17 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <returns>Any matching object or null</returns>
         public virtual T Find(object Key)
         {
-            return this.Find((int)Key);
+            return Find((int)Key);
         }
 
         object ICrud.Find(object Key)
         {
-            return this.Find((int)Key);
+            return Find((int)Key);
         }
 
         KeyedObject IKeyedObjectRepository.Find(int Id)
         {
-            return this.Find(Id);
+            return Find(Id);
         }
 
         /// <summary>
@@ -276,22 +276,22 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <returns>Objects that match the Id</returns>
         public virtual IEnumerable<T> FindRange(IEnumerable<int> Ids)
         {
-            return this.Context.FindRange(Ids);
+            return Context.FindRange(Ids);
         }
 
         IEnumerable<T> ICrud<T>.FindRange(IEnumerable Keys)
         {
-            return this.FindRange(Keys.Cast<int>());
+            return FindRange(Keys.Cast<int>());
         }
 
         IEnumerable ICrud.FindRange(IEnumerable Key)
         {
-            return this.FindRange(Key.Cast<int>());
+            return FindRange(Key.Cast<int>());
         }
 
         IEnumerable<KeyedObject> IKeyedObjectRepository.FindRange(IEnumerable<int> Ids)
         {
-            return this.FindRange(Ids);
+            return FindRange(Ids);
         }
 
         /// <summary>
@@ -300,12 +300,12 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <returns>The Enumerator for the underlying IQueryable</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return this.Context.GetEnumerator();
+            return Context.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.Context.GetEnumerator();
+            return Context.GetEnumerator();
         }
 
         /// <summary>
@@ -315,7 +315,7 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <returns></returns>
         public IQueryable<TDerived> OfType<TDerived>() where TDerived : T
         {
-            return this.Context.OfType<TDerived>();
+            return Context.OfType<TDerived>();
         }
 
         /// <summary>
@@ -339,12 +339,12 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <returns></returns>
         public virtual object ShallowClone(object o)
         {
-            return this.ShallowClone((T)o);
+            return ShallowClone((T)o);
         }
 
         object IRepository.ShallowClone(object o)
         {
-            return this.ShallowClone((T)o);
+            return ShallowClone((T)o);
         }
 
         /// <summary>
@@ -353,12 +353,12 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="o">The object to update</param>
         public virtual void Update(T o)
         {
-            this.Context.Update(o);
+            Context.Update(o);
         }
 
         void ICrud.Update(object o)
         {
-            this.Update((T)o);
+            Update((T)o);
         }
 
         /// <summary>
@@ -367,12 +367,12 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <param name="o">The objects to update</param>
         public virtual void UpdateRange(IEnumerable<T> o)
         {
-            this.Context.UpdateRange(o);
+            Context.UpdateRange(o);
         }
 
         void ICrud.UpdateRange(IEnumerable o)
         {
-            this.UpdateRange(o.Cast<T>());
+            UpdateRange(o.Cast<T>());
         }
 
         /// <summary>
@@ -390,7 +390,7 @@ namespace Penguin.Persistence.Repositories.Repositories
 
             Expression<Func<T, bool>> derivedExpr = Expression.Lambda<Func<T, bool>>(predicate.Body, predicate.Parameters);
 
-            return this.Context.Where(derivedExpr).ToList().Cast<T1>();
+            return Context.Where(derivedExpr).ToList().Cast<T1>();
         }
 
         /// <summary>
@@ -399,7 +399,7 @@ namespace Penguin.Persistence.Repositories.Repositories
         /// <returns> a new write context for the underlying persistence context</returns>
         public IWriteContext WriteContext()
         {
-            return this.Context.WriteContext();
+            return Context.WriteContext();
         }
     }
 }
