@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="Penguin.Projects.Shared\Penguin.Projects.Shared.csproj" />
   <PropertyGroup>
-    <PackageProjectUrl>https://github.com/PenguinCMS/Penguin.Persistence.Repositories</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/PenguinCms/Penguin.Persistence.Repositories</PackageProjectUrl>
     <Version>5.0.5</Version>
     <Description>Abstract objects and interfaces for use with Penguin.Persistence.Abstractions created to convert EntityFramework contexts to a repository pattern allowing for applications to decouple from EF and allow for other data providers.</Description>
     <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
