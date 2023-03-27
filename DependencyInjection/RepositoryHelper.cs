@@ -18,7 +18,7 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
         /// <returns>A list of tuples containing the Repository Type as well as the Type of the entity it manages</returns>
         internal static IEnumerable<RepositoryTypeInfo> GetRepositoriesAndBaseTypes()
         {
-            foreach (Type t in TypeFactory.GetAllTypes())
+            foreach (Type t in TypeFactory.Default.GetAllTypes(true))
             {
                 if (IsValidRepositoryType(t))
                 {

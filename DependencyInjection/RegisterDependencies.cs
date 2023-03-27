@@ -27,11 +27,11 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
                 throw new ArgumentNullException(nameof(serviceRegister));
             }
 
-            List<Type> KeyedObjectTypes = TypeFactory.GetDerivedTypes(typeof(KeyedObject)).ToList();
+            List<Type> KeyedObjectTypes = TypeFactory.Default.GetDerivedTypes(typeof(KeyedObject)).ToList();
 
             StaticLogger.Log($"Penguin.Persistence.Database.DependencyInjection: {Assembly.GetExecutingAssembly().GetName().Version}", StaticLogger.LoggingLevel.Call);
 
-            List<Type> PersistenceContextTypes = TypeFactory.GetAllTypes().Where(t => !t.IsInterface && !t.IsAbstract && typeof(IPersistenceContext).IsAssignableFrom(t) && typeof(IPersistenceContext<Penguin.Persistence.Abstractions.KeyedObject>).IsAssignableFrom(t.MakeGenericType(typeof(Penguin.Persistence.Abstractions.KeyedObject))) && t.GetConstructors().Any(c => !c.GetParameters().Any(p => p.ParameterType.IsPrimitive || p.ParameterType == typeof(string)))).ToList();
+            List<Type> PersistenceContextTypes = TypeFactory.Default.GetAllTypes(true).Where(t => !t.IsInterface && !t.IsAbstract && typeof(IPersistenceContext).IsAssignableFrom(t) && typeof(IPersistenceContext<Penguin.Persistence.Abstractions.KeyedObject>).IsAssignableFrom(t.MakeGenericType(typeof(Penguin.Persistence.Abstractions.KeyedObject))) && t.GetConstructors().Any(c => !c.GetParameters().Any(p => p.ParameterType.IsPrimitive || p.ParameterType == typeof(string)))).ToList();
 
             if (PersistenceContextTypes.Count == 0)
             {
@@ -72,7 +72,7 @@ namespace Penguin.Persistence.Repositories.DependencyInjection
                 Type baseType = ri.RepositoryType.BaseType;
             }
 
-            List<Type> RepositoryImplementations = TypeFactory.GetAllImplementations(typeof(IRepository)).Where(t => t.IsGenericType).OrderByDescending(t => GetHierarchy(t).Count()).ToList();
+            List<Type> RepositoryImplementations = TypeFactory.Default.GetAllImplementations(typeof(IRepository)).Where(t => t.IsGenericType).OrderByDescending(t => GetHierarchy(t).Count()).ToList();
 
             foreach (Type keyedObjectType in KeyedObjectTypes)
             {
